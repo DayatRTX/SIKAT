@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SiGAP Polsri') - Sistem Gangguan & Perbaikan</title>
+    <title>@yield('title', 'SIKAT Polsri') - Sistem Keluhan & Aduan Terpadu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -22,7 +22,7 @@
                         <i class="fas fa-tools text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">SiGAP Polsri</h1>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">SIKAT Polsri</h1>
                         <p class="text-xs text-gray-600 font-medium">Sistem Gangguan & Perbaikan</p>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                         <i class="fas fa-tools text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold gradient-text">SiGAP Polsri</h1>
+                        <h1 class="text-xl font-bold gradient-text">SIKAT Polsri</h1>
                         <p class="text-xs text-gray-600 font-medium">Sistem Gangguan & Perbaikan</p>
                     </div>
                 </div>
@@ -314,7 +314,7 @@
     <!-- Footer Glassmorphism -->
     <footer class="glass-strong border-t border-white/30 py-6 shadow-premium">
         <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
-            <p class="font-medium">&copy; 2025 SiGAP Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
+            <p class="font-medium">&copy; 2025 SIKAT Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
             <p class="text-xs text-gray-500 mt-1">Dibuat dengan ❤️ untuk kampus yang lebih baik</p>
         </div>
     </footer>
@@ -330,7 +330,7 @@
                         <i class="fas fa-tools text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-gray-800">SiGAP Polsri</h1>
+                        <h1 class="text-xl font-bold text-gray-800">SIKAT Polsri</h1>
                         <p class="text-xs text-gray-500">Sistem Gangguan & Perbaikan</p>
                     </div>
                 </div>
@@ -442,7 +442,7 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-tertiary py-4">
         <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
-            <p>&copy; 2024 SiGAP Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
+            <p>&copy; 2024 SIKAT Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
         </div>
     </footer>
 

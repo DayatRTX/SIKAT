@@ -65,12 +65,12 @@
                         </p>
                         <p class="text-sm text-gray-600 flex items-center">
                             <i class="fas fa-calendar mr-2 text-primary"></i>
-                            {{ $report->created_at->locale('id')->isoFormat('D MMM YYYY, HH:mm') }} WIB
+                            {{ $report->created_at->translatedFormat('l, d F Y, H:i') }} WIB
                         </p>
                         @if($report->status === 'done' && $report->completed_at)
                         <p class="text-sm text-green-600 font-semibold flex items-center">
                             <i class="fas fa-check-circle mr-2"></i>
-                            Selesai: {{ $report->completed_at->locale('id')->isoFormat('D MMM YYYY') }}
+                            Selesai: {{ $report->completed_at->translatedFormat('l, d F Y, H:i') }} WIB
                         </p>
                         @endif
                         @if($report->technician)

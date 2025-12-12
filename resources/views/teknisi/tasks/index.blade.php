@@ -66,12 +66,12 @@
                         </p>
                         <p class="text-sm text-gray-600 flex items-center">
                             <i class="fas fa-calendar mr-2 text-primary"></i>
-                            {{ $task->created_at->locale('id')->isoFormat('D MMM YYYY, HH:mm') }} WIB
+                            {{ $task->created_at->translatedFormat('l, d F Y, H:i') }} WIB
                         </p>
                         @if($task->status === 'done' && $task->completed_at)
                         <p class="text-sm text-green-600 font-semibold flex items-center">
                             <i class="fas fa-check-circle mr-2"></i>
-                            Selesai: {{ $task->completed_at->locale('id')->isoFormat('D MMM YYYY') }}
+                            Selesai: {{ $task->completed_at->translatedFormat('l, d F Y, H:i') }} WIB
                         </p>
                         @endif
                     </div>

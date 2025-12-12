@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - SiGAP Polsri</title>
+    <title>Register - SIKAT Polsri</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -43,7 +43,7 @@
                     <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-[#B1B2FF] to-[#AAC4FF] rounded-3xl flex items-center justify-center shadow-xl">
                         <i class="fas fa-tools text-white text-3xl"></i>
                     </div>
-                    <h1 class="text-3xl font-bold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">SiGAP Polsri</h1>
+                    <h1 class="text-3xl font-bold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">SIKAT Polsri</h1>
                 </div>
 
                 <!-- Register Card -->

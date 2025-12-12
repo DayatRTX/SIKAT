@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiGAP Polsri - Sistem Gangguan & Perbaikan Politeknik Negeri Sriwijaya</title>
-    <meta name="description" content="Platform terpercaya untuk melaporkan dan memantau perbaikan fasilitas kampus Politeknik Negeri Sriwijaya">
+    <title>SIKAT Polsri - Sistem Keluhan & Aduan Terpadu Politeknik Negeri Sriwijaya</title>
+    <meta name="description" content="Ada yang rusak? SIKAT sekarang! Platform terpercaya untuk melaporkan dan memantau perbaikan fasilitas kampus Politeknik Negeri Sriwijaya">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -20,9 +20,9 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-transparent" style="background: linear-gradient(to right, #B1B2FF, #AAC4FF); -webkit-background-clip: text; background-clip: text;">
-                            SiGAP Polsri
+                            SIKAT Polsri
                         </h1>
-                        <p class="text-xs text-gray-500 hidden md:block">Sistem Gangguan & Perbaikan</p>
+                        <p class="text-xs text-gray-500 hidden md:block">Sistem Keluhan & Aduan Terpadu</p>
                     </div>
                 </div>
 
@@ -59,14 +59,14 @@
                     </div>
                     
                     <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-                        Lapor Kerusakan Fasilitas Polsri dengan 
+                        Ada yang rusak?
                         <span class="text-transparent" style="background: linear-gradient(to right, #B1B2FF, #AAC4FF); -webkit-background-clip: text; background-clip: text;">
-                            Cepat & Mudah
+                            SIKAT sekarang!
                         </span>
                     </h1>
                     
                     <p class="text-xl text-gray-600 leading-relaxed">
-                        Bantu kami menjaga kenyamanan kampus. Lapor kerusakan, pantau progress perbaikan, dan lihat hasilnya secara real-time.
+                        Laporkan kerusakan fasilitas kampus dengan mudah. Pantau progress perbaikan secara real-time. Bersama kita wujudkan kampus yang nyaman!
                     </p>
 
                     <!-- CTA Buttons -->
@@ -155,7 +155,7 @@
             <div class="text-center mb-16">
                 <span class="text-primary font-semibold text-sm uppercase tracking-wide">Keunggulan</span>
                 <h2 class="text-4xl font-bold text-gray-900 mt-3 mb-4">
-                    Mengapa Memilih SiGAP Polsri?
+                    Mengapa Memilih SIKAT Polsri?
                 </h2>
                 <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                     Platform terpercaya untuk melaporkan dan memantau perbaikan fasilitas kampus
@@ -290,7 +290,7 @@
                 Siap Membantu Menjaga Kampus Kita?
             </h2>
             <p class="text-xl mb-8 opacity-90">
-                Bergabunglah dengan ratusan mahasiswa lainnya yang sudah menggunakan SiGAP Polsri
+                Bergabunglah dengan ratusan mahasiswa lainnya yang sudah menggunakan SIKAT Polsri
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('register') }}" class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
@@ -315,10 +315,10 @@
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #B1B2FF, #AAC4FF);">
                             <i class="fas fa-tools text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold">SiGAP Polsri</h3>
+                        <h3 class="text-xl font-bold">SIKAT Polsri</h3>
                     </div>
                     <p class="text-gray-400 leading-relaxed">
-                        Sistem Gangguan & Perbaikan Politeknik Negeri Sriwijaya. Memudahkan mahasiswa melaporkan kerusakan fasilitas kampus.
+                        Sistem Keluhan & Aduan Terpadu Politeknik Negeri Sriwijaya. Platform terpercaya untuk melaporkan dan memantau perbaikan fasilitas kampus.
                     </p>
                 </div>
 

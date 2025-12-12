@@ -17,12 +17,12 @@
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ $report->title }}</h1>
                 <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                    <span><i class="fas fa-calendar mr-1"></i> {{ $report->created_at->locale('id')->isoFormat('dddd, D MMM YYYY, HH:mm') }} WIB</span>
+                    <span><i class="fas fa-calendar mr-1"></i> {{ $report->created_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
                     <span><i class="fas fa-tag mr-1"></i> {{ $report->category }}</span>
                 </div>
                 @if($report->status === 'done' && $report->completed_at)
                     <div class="flex items-center space-x-4 text-sm text-green-700 font-semibold">
-                        <span><i class="fas fa-check-circle mr-1"></i> Diselesaikan pada: {{ $report->completed_at->locale('id')->isoFormat('dddd, D MMM YYYY, HH:mm') }} WIB</span>
+                        <span><i class="fas fa-check-circle mr-1"></i> Diselesaikan pada: {{ $report->completed_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
                         <span class="text-gray-600">({{ $report->created_at->diffForHumans($report->completed_at, true) }})</span>
                     </div>
                 @endif

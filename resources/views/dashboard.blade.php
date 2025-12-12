@@ -24,89 +24,102 @@
         <!-- Statistics Cards Premium -->
         <div class="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
             <!-- Total Laporan -->
-            <div class="glass-strong rounded-2xl p-6 shadow-premium hover-lift border border-white/50 animate-fadeIn-delay-1">
-                <div class="flex flex-col h-full justify-between">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-premium transform -rotate-6 hover:rotate-0 transition-all duration-300">
-                            <i class="fas fa-clipboard-list text-white text-2xl"></i>
-                        </div>
+            <div class="relative group rounded-3xl p-6 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer" style="background: linear-gradient(135deg, rgba(177, 178, 255, 0.15) 0%, rgba(170, 196, 255, 0.25) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3);">
+                <!-- Large Background Icon -->
+                <div class="absolute -right-6 -bottom-6 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
+                    <i class="fas fa-clipboard-list text-9xl text-[#B1B2FF]"></i>
+                </div>
+                
+                <!-- Content -->
+                <div class="relative z-10">
+                    <div class="w-16 h-16 bg-gradient-to-br from-[#B1B2FF] to-[#AAC4FF] rounded-2xl flex items-center justify-center shadow-xl mb-4 transform group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-clipboard-list text-white text-3xl"></i>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600 font-semibold mb-1">Total Laporan</p>
-                        <h3 class="text-4xl font-bold gradient-text">{{ $stats['total'] }}</h3>
-                    </div>
+                    <p class="text-xs uppercase tracking-wide text-gray-600 font-bold mb-2">Total Laporan</p>
+                    <h3 class="text-5xl font-extrabold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">{{ $stats['total'] }}</h3>
                 </div>
             </div>
 
             <!-- Pending -->
-            <div class="glass-strong rounded-2xl p-6 shadow-premium hover-lift border border-white/50 animate-fadeIn-delay-2">
-                <div class="flex flex-col h-full justify-between">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-premium transform -rotate-6 hover:rotate-0 transition-all duration-300" style="background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);">
-                            <i class="fas fa-clock text-white text-2xl"></i>
-                        </div>
+            <div class="relative group rounded-3xl p-6 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer" style="background: linear-gradient(135deg, rgba(252, 211, 77, 0.15) 0%, rgba(245, 158, 11, 0.25) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3);">
+                <div class="absolute -right-6 -bottom-6 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
+                    <i class="fas fa-clock text-9xl text-yellow-500"></i>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl mb-4 transform group-hover:rotate-6 transition-transform duration-300" style="background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);">
+                        <i class="fas fa-clock text-white text-3xl"></i>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600 font-semibold mb-1">Pending</p>
-                        <h3 class="text-4xl font-bold text-yellow-600">{{ $stats['pending'] }}</h3>
-                    </div>
+                    <p class="text-xs uppercase tracking-wide text-gray-600 font-bold mb-2">Pending</p>
+                    <h3 class="text-5xl font-extrabold text-yellow-600">{{ $stats['pending'] }}</h3>
                 </div>
             </div>
 
             <!-- Process -->
-            <div class="glass-strong rounded-2xl p-6 shadow-premium hover-lift border border-white/50 animate-fadeIn-delay-3">
-                <div class="flex flex-col h-full justify-between">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-premium transform -rotate-6 hover:rotate-0 transition-all duration-300" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);">
-                            <i class="fas fa-spinner text-white text-2xl"></i>
-                        </div>
+            <div class="relative group rounded-3xl p-6 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(59, 130, 246, 0.25) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3);">
+                <div class="absolute -right-6 -bottom-6 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
+                    <i class="fas fa-spinner text-9xl text-blue-500"></i>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl mb-4 transform group-hover:rotate-6 transition-transform duration-300" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);">
+                        <i class="fas fa-spinner text-white text-3xl"></i>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600 font-semibold mb-1">Proses</p>
-                        <h3 class="text-4xl font-bold text-blue-600">{{ $stats['process'] }}</h3>
-                    </div>
+                    <p class="text-xs uppercase tracking-wide text-gray-600 font-bold mb-2">Proses</p>
+                    <h3 class="text-5xl font-extrabold text-blue-600">{{ $stats['process'] }}</h3>
                 </div>
             </div>
 
             <!-- Done -->
-            <div class="glass-strong rounded-2xl p-6 shadow-premium hover-lift border border-white/50 animate-fadeIn-delay-4">
-                <div class="flex flex-col h-full justify-between">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-premium transform -rotate-6 hover:rotate-0 transition-all duration-300" style="background: linear-gradient(135deg, #4ADE80 0%, #22C55E 100%);">
-                            <i class="fas fa-check-circle text-white text-2xl"></i>
-                        </div>
+            <div class="relative group rounded-3xl p-6 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer" style="background: linear-gradient(135deg, rgba(74, 222, 128, 0.15) 0%, rgba(34, 197, 94, 0.25) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3);">
+                <div class="absolute -right-6 -bottom-6 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
+                    <i class="fas fa-check-circle text-9xl text-green-500"></i>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl mb-4 transform group-hover:rotate-6 transition-transform duration-300" style="background: linear-gradient(135deg, #4ADE80 0%, #22C55E 100%);">
+                        <i class="fas fa-check-circle text-white text-3xl"></i>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600 font-semibold mb-1">Selesai</p>
-                        <h3 class="text-4xl font-bold text-green-600">{{ $stats['done'] }}</h3>
-                    </div>
+                    <p class="text-xs uppercase tracking-wide text-gray-600 font-bold mb-2">Selesai</p>
+                    <h3 class="text-5xl font-extrabold text-green-600">{{ $stats['done'] }}</h3>
                 </div>
             </div>
         </div>
 
-        <!-- Weather Widget (API Integration) -->
-        <div class="glass-strong rounded-2xl p-6 shadow-premium border border-white/50 animate-fadeIn-delay-1 hover-lift">
-            <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                <div class="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center mr-3 shadow-premium">
-                    <i class="fas fa-cloud-sun text-white"></i>
-                </div>
-                <span>Cuaca Hari Ini</span>
-            </h3>
-            <div class="text-center">
-                <div class="mb-4 transform hover:scale-110 transition-all duration-300">
-                    <i class="fas fa-sun text-7xl text-yellow-400 animate-pulse-glow"></i>
-                </div>
-                <h4 class="text-3xl font-bold gradient-text mb-2">{{ $weather['temp'] }}°C</h4>
-                <p class="text-gray-700 mb-3 font-semibold">{{ $weather['description'] }}</p>
-                <p class="text-sm text-gray-600 font-medium">
-                    <i class="fas fa-map-marker-alt mr-2 text-primary"></i>
-                    {{ $weather['city'] }}
-                </p>
-                <div class="mt-6 pt-4 border-t border-white/50">
-                    <p class="text-sm text-gray-700 font-semibold">
-                        <i class="fas fa-tint mr-2 text-blue-500"></i>
-                        Kelembaban: {{ $weather['humidity'] }}%
-                    </p>
+        <!-- Weather Widget (Floating Premium Card) -->
+        <div class="relative rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.95) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1);">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-40 h-40 bg-yellow-400/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <h3 class="text-lg font-bold text-white mb-6 flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fas fa-cloud-sun text-white"></i>
+                    </div>
+                    <span>Cuaca Hari Ini</span>
+                </h3>
+                
+                <div class="text-center">
+                    <div class="mb-6 transform hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-sun text-8xl text-yellow-400 drop-shadow-2xl"></i>
+                    </div>
+                    
+                    <h4 class="text-6xl font-black text-white mb-3 drop-shadow-lg">{{ $weather['temp'] }}°C</h4>
+                    
+                    <p class="text-white/90 text-lg mb-4 font-semibold">{{ $weather['description'] }}</p>
+                    
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+                        <i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>
+                        <span class="text-white font-medium">{{ $weather['city'] }}</span>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/20">
+                        <div class="inline-flex items-center text-white/80">
+                            <i class="fas fa-tint mr-2 text-blue-400"></i>
+                            <span class="font-semibold">Kelembaban: {{ $weather['humidity'] }}%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,10 +191,10 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600 font-medium">
-                                    {{ $report->created_at->locale('id')->isoFormat('D MMM YYYY, HH:mm') }} WIB
+                                    {{ $report->created_at->translatedFormat('l, d F Y, H:i') }} WIB
                                     @if($report->status === 'done' && $report->completed_at)
                                         <div class="text-xs text-green-600 font-semibold mt-1">
-                                            <i class="fas fa-check-circle mr-1"></i>Selesai: {{ $report->completed_at->locale('id')->isoFormat('D MMM YYYY') }}
+                                            <i class="fas fa-check-circle mr-1"></i>Selesai: {{ $report->completed_at->translatedFormat('l, d F Y, H:i') }} WIB
                                         </div>
                                     @endif
                                 </td>

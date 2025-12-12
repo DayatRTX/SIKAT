@@ -20,13 +20,13 @@
                     <div>
                         <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ $report->title }}</h1>
                         <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                            <span><i class="fas fa-calendar mr-1"></i> {{ $report->created_at->locale('id')->isoFormat('dddd, D MMM YYYY, HH:mm') }} WIB</span>
+                            <span><i class="fas fa-calendar mr-1"></i> {{ $report->created_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
                             <span><i class="fas fa-tag mr-1"></i> {{ $report->category }}</span>
                             <span><i class="fas fa-hashtag mr-1"></i> ID: {{ $report->id }}</span>
                         </div>
                         @if($report->status === 'done' && $report->completed_at)
                             <div class="flex items-center space-x-4 text-sm text-green-700 font-semibold">
-                                <span><i class="fas fa-check-circle mr-1"></i> Diselesaikan pada: {{ $report->completed_at->locale('id')->isoFormat('dddd, D MMM YYYY, HH:mm') }} WIB</span>
+                                <span><i class="fas fa-check-circle mr-1"></i> Diselesaikan pada: {{ $report->completed_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
                                 <span class="text-gray-600">(Durasi: {{ $report->created_at->diffForHumans($report->completed_at, true) }})</span>
                             </div>
                         @endif
@@ -183,12 +183,12 @@
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
                         <span class="text-gray-600">Tanggal Lapor:</span>
-                        <span class="font-semibold">{{ $report->created_at->locale('id')->isoFormat('D MMM YYYY') }}</span>
+                        <span class="font-semibold">{{ $report->created_at->translatedFormat('d F Y') }}</span>
                     </div>
                     @if($report->completed_at)
                     <div class="flex justify-between">
                         <span class="text-gray-600">Diselesaikan:</span>
-                        <span class="font-semibold text-green-600">{{ $report->completed_at->locale('id')->isoFormat('D MMM YYYY') }}</span>
+                        <span class="font-semibold text-green-600">{{ $report->completed_at->translatedFormat('d F Y') }}</span>
                     </div>
                     @endif
                     <div class="flex justify-between">
