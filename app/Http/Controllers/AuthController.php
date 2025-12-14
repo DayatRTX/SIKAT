@@ -81,7 +81,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->route('dashboard')
-            ->with('success', 'Registrasi berhasil! Selamat datang di SiGAP Polsri.');
+            ->with('success', 'Registrasi berhasil! Selamat datang di SIKAT Polsri.');
     }
 
     /**
