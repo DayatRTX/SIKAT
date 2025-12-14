@@ -3,182 +3,242 @@
 @section('title', 'Detail Tugas')
 
 @section('content')
-<div class="max-w-4xl mx-auto">
+<div class="max-w-6xl mx-auto space-y-6">
     <!-- Back Button -->
-    <div class="mb-6">
-        <a href="{{ route('teknisi.tasks.index') }}" class="text-primary hover:text-secondary font-semibold">
-            <i class="fas fa-arrow-left mr-2"></i> Kembali ke Daftar Tugas
+    <div>
+        <a href="{{ route('teknisi.tasks.index') }}" class="inline-flex items-center text-slate-600 hover:text-emerald-600 transition-colors font-bold group">
+            <div class="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-gradient-to-br group-hover:from-emerald-500 group-hover:to-teal-600 flex items-center justify-center text-slate-500 group-hover:text-white transition-all mr-2">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            Kembali ke Daftar
         </a>
     </div>
 
-    <!-- Header -->
-    <div class="card mb-6">
-        <div class="flex items-start justify-between mb-4">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ $report->title }}</h1>
-                <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                    <span><i class="fas fa-calendar mr-1"></i> {{ $report->created_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
-                    <span><i class="fas fa-tag mr-1"></i> {{ $report->category }}</span>
-                    <span><i class="fas fa-hashtag mr-1"></i> ID: {{ $report->id }}</span>
-                </div>
-                @if($report->status === 'done' && $report->completed_at)
-                    <div class="flex items-center space-x-4 text-sm text-green-700 font-semibold">
-                        <span><i class="fas fa-check-circle mr-1"></i> Diselesaikan pada: {{ $report->completed_at->translatedFormat('l, d F Y, H:i') }} WIB</span>
-                        <span class="text-gray-600">({{ $report->created_at->diffForHumans($report->completed_at, true) }})</span>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left: Main Content -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Header Card -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="inline-block px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs font-bold rounded-full shadow-md mb-3">
+                                {{ $report->category }}
+                            </span>
+                            <h1 class="text-2xl font-bold text-slate-800">{{ $report->title }}</h1>
+                        </div>
+                        @if($report->status === 'process')
+                            <span class="px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-blue-500/30">
+                                <i class="fas fa-cog fa-spin mr-1"></i> Dalam Proses
+                            </span>
+                        @else
+                            <span class="px-4 py-2 bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-green-500/30">
+                                <i class="fas fa-check-circle mr-1"></i> Selesai
+                            </span>
+                        @endif
                     </div>
-                @endif
+
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 mb-4">
+                        <p class="text-slate-700 font-medium">{{ $report->description }}</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 text-sm">
+                        <div class="flex items-center bg-emerald-100 text-emerald-700 px-3 py-2 rounded-xl font-bold">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            {{ $report->location }}
+                        </div>
+                        <div class="flex items-center bg-cyan-100 text-cyan-700 px-3 py-2 rounded-xl font-bold">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            {{ $report->created_at->translatedFormat('d F Y') }}
+                        </div>
+                        <div class="flex items-center bg-[#ebebff] text-white px-3 py-2 rounded-xl font-bold">
+                            <i class="fas fa-user mr-2"></i>
+                            {{ $report->user->name }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Status -->
+
+            <!-- Photos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Before -->
+                <div class="glass-card rounded-2xl p-4 shadow-lg border-t-4 border-rose-500">
+                    <h3 class="text-sm font-bold text-slate-700 mb-3 flex items-center">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white mr-2 shadow-md">
+                            <i class="fas fa-camera text-sm"></i>
+                        </div>
+                        Foto Kerusakan
+                    </h3>
+                    @if($report->image_before)
+                        <div class="rounded-xl overflow-hidden shadow-lg group relative">
+                            <img src="{{ asset('storage/' . $report->image_before) }}" alt="Before" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                    @else
+                        <div class="h-56 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
+                            <span class="text-slate-400 text-sm font-medium">Tidak ada foto</span>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- After -->
+                <div class="glass-card rounded-2xl p-4 shadow-lg border-t-4 border-emerald-500">
+                    <h3 class="text-sm font-bold text-slate-700 mb-3 flex items-center">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white mr-2 shadow-md">
+                            <i class="fas fa-check-double text-sm"></i>
+                        </div>
+                        Foto Perbaikan
+                    </h3>
+                    @if($report->image_after)
+                        <div class="rounded-xl overflow-hidden shadow-lg group relative">
+                            <img src="{{ asset('storage/' . $report->image_after) }}" alt="After" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                    @else
+                        <div class="h-56 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
+                            <span class="text-slate-400 text-sm font-medium">Belum ada foto</span>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Action Panel -->
+        <div class="space-y-6">
+            <!-- Complete Task Form -->
             @if($report->status === 'process')
-                <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-                    <i class="fas fa-spinner mr-1"></i>Sedang Dikerjakan
-                </span>
-            @elseif($report->status === 'done')
-                <span class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
-                    <i class="fas fa-check-circle mr-1"></i>Selesai
-                </span>
-            @else
-                <span class="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold">
-                    <i class="fas fa-clock mr-1"></i>Pending
-                </span>
-            @endif
-        </div>
-
-        <div class="space-y-4">
-            <!-- Reporter -->
-            <div class="p-4 bg-tertiary rounded-lg">
-                <p class="text-sm font-semibold text-gray-700 mb-1">
-                    <i class="fas fa-user mr-2 text-primary"></i> Pelapor
-                </p>
-                <p class="text-gray-800">{{ $report->user->name }}</p>
-            </div>
-
-            <!-- Location -->
-            <div class="p-4 bg-tertiary rounded-lg">
-                <p class="text-sm font-semibold text-gray-700 mb-1">
-                    <i class="fas fa-map-marker-alt mr-2 text-primary"></i> Lokasi
-                </p>
-                <p class="text-gray-800">{{ $report->location }}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Description -->
-    <div class="card mb-6">
-        <h2 class="text-lg font-bold text-gray-800 mb-3">
-            <i class="fas fa-align-left mr-2 text-primary"></i> Deskripsi Kerusakan
-        </h2>
-        <p class="text-gray-700 leading-relaxed">{{ $report->description }}</p>
-    </div>
-
-    <!-- Images -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <!-- Before Image -->
-        @if($report->image_before)
-            <div class="card">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-camera mr-2 text-primary"></i> Foto Kondisi Kerusakan
-                </h3>
-                <img 
-                    src="{{ asset('storage/' . $report->image_before) }}" 
-                    alt="Before"
-                    class="w-full rounded-lg shadow-md"
-                >
-            </div>
-        @endif
-
-        <!-- After Image -->
-        @if($report->image_after)
-            <div class="card">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    <i class="fas fa-camera mr-2 text-green-500"></i> Foto Hasil Perbaikan
-                </h3>
-                <img 
-                    src="{{ asset('storage/' . $report->image_after) }}" 
-                    alt="After"
-                    class="w-full rounded-lg shadow-md"
-                >
-            </div>
-        @endif
-    </div>
-
-    <!-- Complete Task Form (Only if not done) -->
-    @if($report->status !== 'done')
-        <div class="card bg-gradient-to-br from-tertiary to-background">
-            <h3 class="text-lg font-bold text-gray-800 mb-4">
-                <i class="fas fa-check-double mr-2 text-primary"></i> Selesaikan Perbaikan
-            </h3>
-            <p class="text-gray-600 mb-6">Upload foto hasil perbaikan untuk menyelesaikan tugas ini</p>
-
-            <form action="{{ route('teknisi.tasks.complete', $report) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                @csrf
-
-                <!-- Upload After Image -->
-                <div>
-                    <label for="image_after" class="block text-sm font-semibold text-gray-700 mb-2">
-                        <i class="fas fa-camera mr-1"></i> Foto Hasil Perbaikan <span class="text-red-500">*</span>
-                    </label>
-                    <div class="border-2 border-dashed border-primary rounded-lg p-6 text-center hover:border-secondary transition-all">
-                        <input 
-                            type="file" 
-                            id="image_after" 
-                            name="image_after" 
-                            accept="image/*"
-                            class="hidden"
-                            onchange="previewAfterImage(event)"
-                            required
-                        >
-                        <label for="image_after" class="cursor-pointer">
-                            <div id="after-preview-container" class="mb-4 hidden">
-                                <img id="after-preview" src="" alt="Preview" class="max-h-64 mx-auto rounded-lg shadow-md">
-                            </div>
-                            <div id="after-upload-placeholder">
-                                <i class="fas fa-cloud-upload-alt text-5xl text-primary mb-3"></i>
-                                <p class="text-gray-700 font-semibold mb-1">Klik untuk upload foto hasil</p>
-                                <p class="text-sm text-gray-500">Format: JPG, PNG (Max 2MB)</p>
-                            </div>
-                        </label>
+            <div class="glass-card rounded-2xl p-6 shadow-lg border-t-4 border-emerald-500">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white mr-3 shadow-lg shadow-emerald-500/30">
+                        <i class="fas fa-clipboard-check"></i>
                     </div>
-                    @error('image_after')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    Selesaikan Tugas
+                </h3>
 
-                <!-- Submit Button -->
-                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl">
-                    <i class="fas fa-check-circle mr-2"></i> Tandai Selesai
-                </button>
-            </form>
-        </div>
-    @else
-        <!-- Completed Message -->
-        <div class="card bg-green-50 border-2 border-green-500">
-            <div class="text-center py-6">
-                <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">Tugas Selesai!</h3>
-                <p class="text-gray-600">Perbaikan telah diselesaikan pada {{ $report->completed_at ? $report->completed_at->translatedFormat('l, d F Y, H:i') : $report->updated_at->translatedFormat('l, d F Y, H:i') }} WIB</p>
-                @if($report->completed_at)
-                    <p class="text-gray-500 text-sm mt-2">Durasi pengerjaan: {{ $report->created_at->diffForHumans($report->completed_at, true) }}</p>
-                @endif
+                <form action="{{ route('teknisi.tasks.complete', $report) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    
+                    <!-- Upload Photo -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            <i class="fas fa-camera mr-1 text-emerald-500"></i> Foto Hasil Perbaikan <span class="text-rose-500">*</span>
+                        </label>
+                        <div class="relative group">
+                            <input type="file" id="image_after" name="image_after" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="image/*" onchange="previewImage(this)" required>
+                            <div class="w-full h-36 border-3 border-dashed border-emerald-300 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 flex flex-col items-center justify-center transition-all group-hover:border-emerald-500" id="drop-zone">
+                                <div id="preview-container" class="hidden w-full h-full p-2">
+                                    <img id="preview-img" src="#" alt="Preview" class="w-full h-full object-contain rounded-lg">
+                                </div>
+                                <div id="upload-placeholder" class="text-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-2 text-white shadow-md group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-cloud-upload-alt text-xl"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-700 font-bold">Upload foto hasil</p>
+                                    <p class="text-xs text-slate-500">JPG, PNG (Max 2MB)</p>
+                                </div>
+                            </div>
+                        </div>
+                        @error('image_after') <p class="text-rose-500 text-xs mt-2 font-medium"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</p> @enderror
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            <i class="fas fa-sticky-note mr-1 text-amber-500"></i> Catatan (Opsional)
+                        </label>
+                        <textarea name="notes" rows="3" class="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all outline-none font-medium text-slate-800 resize-none" placeholder="Catatan perbaikan..."></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/40 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl text-lg">
+                        <i class="fas fa-check-circle mr-2"></i> Tandai Selesai
+                    </button>
+                </form>
+            </div>
+            @else
+            <!-- Completion Info -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg border-t-4 border-emerald-500">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/30">
+                        <i class="fas fa-check-double text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Tugas Selesai!</h3>
+                    <p class="text-sm text-slate-600 mb-4">Diselesaikan pada:</p>
+                    <div class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl font-bold text-sm inline-block">
+                        {{ \Carbon\Carbon::parse($report->completed_at)->translatedFormat('l, d F Y H:i') }}
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <!-- Reporter Info -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg border-t-4 border-[#B1B2FF]">
+                <h3 class="text-sm font-bold text-slate-700 mb-4 flex items-center">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6567dd] to-[#5658cc] flex items-center justify-center text-white mr-2 shadow-md">
+                        <i class="fas fa-user text-sm"></i>
+                    </div>
+                    Pelapor
+                </h3>
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#6567dd] to-[#5658cc] flex items-center justify-center text-white shadow-lg text-lg font-bold">
+                        {{ strtoupper(substr($report->user->name, 0, 1)) }}
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-lg">{{ $report->user->name }}</p>
+                        <p class="text-xs text-slate-500">{{ $report->user->email }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Info -->
+            <div class="glass-card rounded-2xl p-6 shadow-lg">
+                <h3 class="text-sm font-bold text-slate-700 mb-4 flex items-center">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white mr-2 shadow-md">
+                        <i class="fas fa-info-circle text-sm"></i>
+                    </div>
+                    Informasi Singkat
+                </h3>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                        <span class="text-sm text-slate-600">Kategori</span>
+                        <span class="text-sm font-bold text-slate-800">{{ $report->category }}</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                        <span class="text-sm text-slate-600">Lokasi</span>
+                        <span class="text-sm font-bold text-slate-800">{{ $report->location }}</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                        <span class="text-sm text-[#a4b0ff] font-bold">Dilaporkan</span>
+                        <span class="text-sm font-bold text-slate-800">{{ $report->created_at->diffForHumans() }}</span>
+                    </div>
+                </div>
             </div>
         </div>
-    @endif
+    </div>
 </div>
 
-@push('scripts')
 <script>
-    function previewAfterImage(event) {
-        const file = event.target.files[0];
-        if (file) {
+    function previewImage(input) {
+        const container = document.getElementById('preview-container');
+        const placeholder = document.getElementById('upload-placeholder');
+        const preview = document.getElementById('preview-img');
+        
+        if (input.files && input.files[0]) {
             const reader = new FileReader();
+            
             reader.onload = function(e) {
-                document.getElementById('after-preview').src = e.target.result;
-                document.getElementById('after-preview-container').classList.remove('hidden');
-                document.getElementById('after-upload-placeholder').classList.add('hidden');
+                preview.src = e.target.result;
+                container.classList.remove('hidden');
+                placeholder.classList.add('hidden');
             }
-            reader.readAsDataURL(file);
+            
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            container.classList.add('hidden');
+            placeholder.classList.remove('hidden');
         }
     }
 </script>
-@endpush
 @endsection

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 
 // Halaman Landing Page
 Route::get('/', function () {
@@ -35,16 +36,27 @@ Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasi
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Report Management
     Route::get('/laporan', [ReportController::class, 'adminIndex'])->name('reports.index');
     Route::get('/laporan/{report}', [ReportController::class, 'adminShow'])->name('reports.show');
     Route::post('/laporan/{report}/validate', [ReportController::class, 'validate'])->name('reports.validate');
-    Route::post('/laporan/{report}/assign', [ReportController::class, 'assign'])->name('reports.assign');
+    Route::put('/laporan/{report}/assign', [ReportController::class, 'assign'])->name('reports.assign');
+    Route::put('/laporan/{report}/reject', [ReportController::class, 'reject'])->name('reports.reject');
+
+    // User Management
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 // Teknisi Routes
 Route::middleware(['auth', 'role:teknisi'])->prefix('teknisi')->name('teknisi.')->group(function () {
     Route::get('/tugas', [ReportController::class, 'teknisiIndex'])->name('tasks.index');
     Route::get('/tugas/{report}', [ReportController::class, 'teknisiShow'])->name('tasks.show');
-    Route::post('/tugas/{report}/complete', [ReportController::class, 'complete'])->name('tasks.complete');
+    Route::put('/tugas/{report}/complete', [ReportController::class, 'complete'])->name('tasks.complete');
 });
 

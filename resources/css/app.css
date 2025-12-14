@@ -11,15 +11,40 @@
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 
-    /* Custom Color Palette - SiGAP Polsri */
-    --color-primary: #b1b2ff;
-    --color-secondary: #aac4ff;
-    --color-tertiary: #d2daff;
-    --color-background: #eef1ff;
+    /* Custom Color Palette - SIKAT Polsri (Soft Blue Theme) */
+    --color-primary: #b1b2ff; /* Soft Blue Primary */
+    --color-primary-light: #c4c5ff; /* Lighter Blue */
+    --color-secondary: #aac4ff; /* Soft Blue Secondary */
+    --color-secondary-light: #bbc5ff; /* Lighter Blue */
+    --color-tertiary: #d2daff; /* Very Light Blue */
+    --color-background: #eef1ff; /* Ultra Light Blue Background */
+
+    /* Accent Colors for Variety */
+    --color-accent-pink: #ec4899;
+    --color-accent-orange: #f97316;
+    --color-accent-emerald: #10b981;
+    --color-accent-amber: #f59e0b;
+    --color-accent-rose: #f43f5e;
+    --color-accent-indigo: #b1b2ff;
+
+    /* Text Colors - Better Contrast */
+    --color-text-dark: #1e293b;
+    --color-text-medium: #475569;
+    --color-text-light: #64748b;
+
+    /* Blue Palette Text - Darker for Better Readability */
+    --color-blue-dark: #9091eb;
+    --color-blue-medium: #b1b2ff;
+    --color-blue-light: #8384ee;
+
+    /* Yellow/Amber Palette for Accents */
+    --color-yellow-dark: #f57c00;
+    --color-yellow-medium: #ffa726;
+    --color-yellow-light: #ffb74d;
 
     /* Custom Components */
-    --color-primary-hover: #9ea0f5;
-    --color-secondary-hover: #96b4f5;
+    --color-primary-hover: #9a9bff;
+    --color-secondary-hover: #93b5ff;
 }
 
 /* Custom Utility Classes */
@@ -124,10 +149,54 @@
 
 /* Gradient Text */
 .gradient-text {
+    background: linear-gradient(135deg, #b1b2ff 0%, #9091eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-text-warm {
+    background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-text-cool {
     background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* Glass Card with Colored Accent Border */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 32px rgba(177, 178, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card-purple {
+    background: linear-gradient(
+        135deg,
+        rgba(177, 178, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(177, 178, 255, 0.2);
+}
+
+.glass-card-cyan {
+    background: linear-gradient(
+        135deg,
+        rgba(170, 196, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(170, 196, 255, 0.2);
 }
 
 /* ========================================
@@ -184,18 +253,42 @@
 /* Button Smooth Hover */
 .btn-premium {
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
+    background: linear-gradient(135deg, #b1b2ff 0%, #b1b2ff 50%, #aac4ff 100%);
     border: none;
-    box-shadow: 0 4px 15px rgba(177, 178, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(177, 178, 255, 0.4);
+    color: white;
+    font-weight: 600;
 }
 
 .btn-premium:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(177, 178, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(177, 178, 255, 0.5);
+    background: linear-gradient(135deg, #9a9bff 0%, #9a9bff 50%, #93b5ff 100%);
 }
 
 .btn-premium:active {
     transform: translateY(0) scale(1);
+}
+
+/* Colorful Buttons */
+.btn-gradient-purple {
+    background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
+    box-shadow: 0 4px 15px rgba(177, 178, 255, 0.4);
+}
+
+.btn-gradient-cyan {
+    background: linear-gradient(135deg, #aac4ff 0%, #bbc5ff 100%);
+    box-shadow: 0 4px 15px rgba(170, 196, 255, 0.4);
+}
+
+.btn-gradient-pink {
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+
+.btn-gradient-orange {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
 /* Pulse Animation */
@@ -387,25 +480,41 @@ select:focus {
     transform: translateY(-2px);
 }
 
-/* Badge Modern */
+/* Badge Modern - Vibrant Gradients */
 .badge-pending {
-    background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
-    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.5);
+    color: white;
+    font-weight: 700;
 }
 
 .badge-process {
-    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #3b82f6 0%, #b1b2ff 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+    color: white;
+    font-weight: 700;
 }
 
 .badge-done {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+    color: white;
+    font-weight: 700;
 }
 
 .badge-rejected {
-    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+    background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+    box-shadow: 0 4px 12px rgba(244, 63, 94, 0.5);
+    color: white;
+    font-weight: 700;
+}
+
+/* Category Badges - Colorful */
+.badge-category {
+    background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(177, 178, 255, 0.3);
 }
 
 /* File Upload Area */
@@ -438,8 +547,18 @@ select:focus {
 
 /* Sidebar Active Item */
 .sidebar-active {
-    background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
-    box-shadow: 0 4px 16px rgba(177, 178, 255, 0.4);
+    background: linear-gradient(135deg, #b1b2ff 0%, #b1b2ff 50%, #aac4ff 100%);
+    box-shadow: 0 4px 16px rgba(177, 178, 255, 0.5);
+    color: white;
+}
+
+/* Sidebar Hover */
+.sidebar-hover:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(177, 178, 255, 0.1) 0%,
+        rgba(170, 196, 255, 0.1) 100%
+    );
 }
 
 /* Mobile Menu */
@@ -454,7 +573,7 @@ select:focus {
     scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Vibrant */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -471,5 +590,141 @@ select:focus {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #9ea0f5 0%, #96b4f5 100%);
+    background: linear-gradient(135deg, #9a9bff 0%, #93b5ff 100%);
+}
+
+/* ========================================
+   ENHANCED TYPOGRAPHY & COLORS
+   ======================================== */
+
+/* Dark Text for Readability */
+.text-heading {
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.text-body {
+    color: #475569;
+}
+
+.text-muted {
+    color: #64748b;
+}
+
+/* Vibrant Color Classes */
+.text-purple-vibrant {
+    color: #9091eb;
+}
+
+.text-cyan-vibrant {
+    color: #b1b2ff;
+}
+
+.text-blue-dark {
+    color: #9091eb;
+}
+
+.text-blue-medium {
+    color: #b1b2ff;
+}
+
+.text-pink-vibrant {
+    color: #ec4899;
+}
+
+.text-orange-vibrant {
+    color: #f97316;
+}
+
+.text-emerald-vibrant {
+    color: #10b981;
+}
+
+/* Background Accents */
+.bg-purple-soft {
+    background: linear-gradient(
+        135deg,
+        rgba(177, 178, 255, 0.1) 0%,
+        rgba(210, 218, 255, 0.1) 100%
+    );
+}
+
+.bg-cyan-soft {
+    background: linear-gradient(
+        135deg,
+        rgba(170, 196, 255, 0.1) 0%,
+        rgba(187, 197, 255, 0.1) 100%
+    );
+}
+
+.bg-pink-soft {
+    background: linear-gradient(
+        135deg,
+        rgba(236, 72, 153, 0.1) 0%,
+        rgba(244, 114, 182, 0.1) 100%
+    );
+}
+
+.bg-orange-soft {
+    background: linear-gradient(
+        135deg,
+        rgba(249, 115, 22, 0.1) 0%,
+        rgba(251, 146, 60, 0.1) 100%
+    );
+}
+
+/* Icon Containers - Colorful */
+.icon-purple {
+    background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
+    box-shadow: 0 4px 12px rgba(177, 178, 255, 0.4);
+}
+
+.icon-cyan {
+    background: linear-gradient(135deg, #aac4ff 0%, #bbc5ff 100%);
+    box-shadow: 0 4px 12px rgba(170, 196, 255, 0.4);
+}
+
+.icon-pink {
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+}
+
+.icon-orange {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+.icon-emerald {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.icon-amber {
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Decorative Blobs */
+.blob-purple {
+    background: radial-gradient(
+        circle,
+        rgba(177, 178, 255, 0.3) 0%,
+        transparent 70%
+    );
+}
+
+.blob-cyan {
+    background: radial-gradient(
+        circle,
+        rgba(170, 196, 255, 0.3) 0%,
+        transparent 70%
+    );
+}
+
+.blob-pink {
+    background: radial-gradient(
+        circle,
+        rgba(236, 72, 153, 0.3) 0%,
+        transparent 70%
+    );
 }

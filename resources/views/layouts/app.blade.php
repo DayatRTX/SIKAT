@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SIKAT Polsri') - Sistem Keluhan & Aduan Terpadu</title>
+    <title>@yield('title', 'SIKAT Polsri') - Sistem Informasi Kerusakan Aset dan Tindak lanjut</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -15,62 +15,68 @@
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
             class="fixed lg:relative lg:translate-x-0 inset-y-0 left-0 z-50 w-72 sidebar-glass shadow-2xl transition-transform duration-300 ease-in-out flex flex-col"
         >
-            <!-- Logo & Brand -->
-            <div class="p-6 border-b border-white/30">
-                <div class="flex items-center space-x-3 animate-fadeInUp">
-                    <div class="w-12 h-12 bg-gradient-to-br from-[#B1B2FF] to-[#AAC4FF] rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-all duration-300">
-                        <i class="fas fa-tools text-white text-xl"></i>
+            <!-- Logo & Brand - Vibrant -->
+            <div class="p-6 border-b border-white/30 relative overflow-hidden">
+                <!-- Decorative blob -->
+                <div class="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-[#f7f8ff]0/20 to-pink-500/20 rounded-full blur-xl"></div>
+                <div class="flex items-center space-x-3 animate-fadeInUp relative z-10">
+                    <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-[#4a4bcc]/40 transform hover:scale-110 transition-all duration-300 bg-white">
+                        <img src="{{ asset('images/icon.jpg') }}" alt="SIKAT Polsri Logo" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#B1B2FF] to-[#AAC4FF] bg-clip-text text-transparent">SIKAT Polsri</h1>
-                        <p class="text-xs text-gray-600 font-medium">Sistem Gangguan & Perbaikan</p>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#4a4bcc] via-[#5658cc] to-[#6567dd] bg-clip-text text-transparent">SIKAT Polsri</h1>
+                        <p class="text-xs text-slate-600 font-bold">Sistem Keluhan & Aduan</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Navigation Menu -->
+            <!-- Navigation Menu - Vibrant -->
             <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 group {{ request()->routeIs('dashboard') ? 'sidebar-active text-white' : 'text-gray-700 hover:bg-white/40' }}">
-                    <i class="fas fa-home text-lg {{ request()->routeIs('dashboard') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
+                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('dashboard') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-purple-700' }}">
+                    <i class="fas fa-home text-lg {{ request()->routeIs('dashboard') ? '' : 'text-[#f5f5ff]0 group-hover:scale-110 transition-transform' }}"></i>
                     <span>Dashboard</span>
                 </a>
 
                 @if(auth()->user()->role === 'mahasiswa')
-                    <a href="{{ route('mahasiswa.reports.create') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 group {{ request()->routeIs('mahasiswa.reports.create') ? 'sidebar-active text-white' : 'text-gray-700 hover:bg-white/40' }}">
-                        <i class="fas fa-plus-circle text-lg {{ request()->routeIs('mahasiswa.reports.create') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
+                    <a href="{{ route('mahasiswa.reports.create') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('mahasiswa.reports.create') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-cyan-700' }}">
+                        <i class="fas fa-plus-circle text-lg {{ request()->routeIs('mahasiswa.reports.create') ? '' : 'text-cyan-500 group-hover:scale-110 transition-transform' }}"></i>
                         <span>Buat Laporan</span>
                     </a>
-                    <a href="{{ route('mahasiswa.reports.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 group {{ request()->routeIs('mahasiswa.reports.index') ? 'sidebar-active text-white' : 'text-gray-700 hover:bg-white/40' }}">
-                        <i class="fas fa-list text-lg {{ request()->routeIs('mahasiswa.reports.index') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
+                    <a href="{{ route('mahasiswa.reports.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('mahasiswa.reports.index') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-[#a4b0ff]' }}">
+                        <i class="fas fa-list text-lg {{ request()->routeIs('mahasiswa.reports.index') ? '' : 'text-[#f7f8ff]0 group-hover:scale-110 transition-transform' }}"></i>
                         <span>Riwayat Laporan</span>
                     </a>
                 @elseif(auth()->user()->role === 'admin')
-                    <a href="{{ route('admin.reports.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 group {{ request()->routeIs('admin.reports.*') ? 'sidebar-active text-white' : 'text-gray-700 hover:bg-white/40' }}">
-                        <i class="fas fa-clipboard-list text-lg {{ request()->routeIs('admin.reports.*') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
+                    <a href="{{ route('admin.reports.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('admin.reports.*') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-indigo-700' }}">
+                        <i class="fas fa-clipboard-list text-lg {{ request()->routeIs('admin.reports.*') ? '' : 'text-[#f5f5ff]0 group-hover:scale-110 transition-transform' }}"></i>
                         <span>Kelola Laporan</span>
                     </a>
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('admin.users.*') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-[#a4b0ff]' }}">
+                        <i class="fas fa-users-cog text-lg {{ request()->routeIs('admin.users.*') ? '' : 'text-[#f7f8ff]0 group-hover:scale-110 transition-transform' }}"></i>
+                        <span>Manajemen User</span>
+                    </a>
                 @elseif(auth()->user()->role === 'teknisi')
-                    <a href="{{ route('teknisi.tasks.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 group {{ request()->routeIs('teknisi.tasks.*') ? 'sidebar-active text-white' : 'text-gray-700 hover:bg-white/40' }}">
-                        <i class="fas fa-tasks text-lg {{ request()->routeIs('teknisi.tasks.*') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
+                    <a href="{{ route('teknisi.tasks.index') }}" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all duration-300 group {{ request()->routeIs('teknisi.tasks.*') ? 'sidebar-active text-white shadow-lg shadow-[#B1B2FF]/30' : 'text-slate-700 hover:bg-white/60 hover:text-emerald-700' }}">
+                        <i class="fas fa-tasks text-lg {{ request()->routeIs('teknisi.tasks.*') ? '' : 'text-emerald-500 group-hover:scale-110 transition-transform' }}"></i>
                         <span>Tugas Perbaikan</span>
                     </a>
                 @endif
             </nav>
 
-            <!-- User Profile in Sidebar (Mobile) -->
+            <!-- User Profile in Sidebar (Mobile) - Vibrant -->
             <div class="p-4 border-t border-white/30 lg:hidden">
                 <div class="flex items-center space-x-3 mb-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] to-[#AAC4FF] rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30">
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
                     <div class="flex-1">
-                        <p class="text-sm font-bold text-gray-800">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-gray-600 capitalize">{{ auth()->user()->role }}</p>
+                        <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
+                        <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
                     </div>
                 </div>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-600 rounded-xl font-semibold text-sm transition-all duration-300">
+                    <button type="submit" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-rose-500 to-red-600 text-white rounded-xl font-bold text-sm shadow-md shadow-rose-500/30 hover:-translate-y-0.5 transition-all duration-300">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </button>
@@ -110,13 +116,13 @@
                             <h2 class="text-lg font-bold text-gray-800">@yield('page-title', 'Dashboard')</h2>
                         </div>
 
-                        <!-- User Menu (Desktop) -->
+                        <!-- User Menu (Desktop) - Vibrant -->
                         <div x-data="{ dropdownOpen: false }" class="hidden lg:flex items-center space-x-4 relative">
                             <div class="text-right">
-                                <p class="text-sm font-bold text-gray-800">{{ auth()->user()->name }}</p>
-                                <p class="text-xs text-gray-600 capitalize">{{ auth()->user()->role }}</p>
+                                <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
+                                <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
                             </div>
-                            <button @click="dropdownOpen = !dropdownOpen" class="w-11 h-11 bg-gradient-to-br from-[#B1B2FF] to-[#AAC4FF] rounded-full flex items-center justify-center text-white font-bold shadow-lg hover:scale-110 transition-all duration-300 ring-4 ring-white/50">
+                            <button @click="dropdownOpen = !dropdownOpen" class="w-11 h-11 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30 hover:scale-110 transition-all duration-300 ring-4 ring-white/60">
                                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                             </button>
 
@@ -130,12 +136,12 @@
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100 scale-100"
                                 x-transition:leave-end="opacity-0 scale-95"
-                                class="absolute right-0 top-14 w-56 card-glass rounded-2xl shadow-2xl overflow-hidden"
+                                class="absolute right-0 top-14 w-56 card-glass rounded-2xl shadow-2xl overflow-hidden border border-white/30"
                             >
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="w-full flex items-center space-x-3 px-5 py-3.5 hover:bg-white/40 transition-all text-gray-700 font-semibold">
-                                        <i class="fas fa-sign-out-alt text-red-500"></i>
+                                    <button type="submit" class="w-full flex items-center space-x-3 px-5 py-3.5 hover:bg-gradient-to-r hover:from-rose-50 hover:to-red-50 transition-all text-slate-700 hover:text-rose-600 font-bold">
+                                        <i class="fas fa-sign-out-alt text-rose-500"></i>
                                         <span>Logout</span>
                                     </button>
                                 </form>
@@ -198,12 +204,12 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3 animate-fadeIn">
-                    <div class="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-premium transform hover:scale-110 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#B1B2FF]/30 transform hover:scale-110 transition-all duration-300">
                         <i class="fas fa-tools text-white text-xl"></i>
                     </div>
                     <div>
                         <h1 class="text-xl font-bold gradient-text">SIKAT Polsri</h1>
-                        <p class="text-xs text-gray-600 font-medium">Sistem Gangguan & Perbaikan</p>
+                        <p class="text-xs text-gray-600 font-medium">Sistem Keluhan & Aduan</p>
                     </div>
                 </div>
 
@@ -214,7 +220,7 @@
                         <p class="text-xs text-primary capitalize font-medium">{{ auth()->user()->role }}</p>
                     </div>
                     <div class="relative group">
-                        <button class="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-white font-bold shadow-premium hover:scale-110 transition-all duration-300 ring-2 ring-white/50">
+                        <button class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30 hover:scale-110 transition-all duration-300 ring-2 ring-white/50">
                             {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                         </button>
                         <!-- Dropdown -->
@@ -326,12 +332,12 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-lg flex items-center justify-center shadow-lg shadow-[#B1B2FF]/30">
                         <i class="fas fa-tools text-white text-xl"></i>
                     </div>
                     <div>
                         <h1 class="text-xl font-bold text-gray-800">SIKAT Polsri</h1>
-                        <p class="text-xs text-gray-500">Sistem Gangguan & Perbaikan</p>
+                        <p class="text-xs text-gray-500">Sistem Keluhan & Aduan</p>
                     </div>
                 </div>
 
@@ -342,7 +348,7 @@
                         <p class="text-xs text-gray-500 capitalize">{{ auth()->user()->role }}</p>
                     </div>
                     <div class="relative group">
-                        <button class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold hover:bg-secondary transition-all">
+                        <button class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-semibold shadow-lg shadow-[#B1B2FF]/30 hover:from-[#5658cc] hover:to-[#3e3fbb] transition-all">
                             {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                         </button>
                         <!-- Dropdown -->

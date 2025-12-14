@@ -218,6 +218,25 @@ class ReportController extends Controller
         ]);
 
         return back()->with('success', 'Perbaikan berhasil diselesaikan!');
-        return back()->with('success', 'Perbaikan berhasil diselesaikan!');
+    }
+
+    /**
+     * Tolak laporan (Admin).
+     */
+    public function reject(Request $request, Report $report)
+    {
+        $validated = $request->validate([
+            'reject_reason' => 'required|string|max:500',
+        ], [
+            'reject_reason.required' => 'Alasan penolakan wajib diisi.',
+        ]);
+
+        $report->update([
+            'status' => 'rejected',
+            'reject_reason' => $validated['reject_reason'],
+            'completed_at' => null,
+        ]);
+
+        return back()->with('success', 'Laporan berhasil ditolak.');
     }
 }

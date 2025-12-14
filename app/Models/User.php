@@ -46,4 +46,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relasi ke laporan yang dibuat user (untuk mahasiswa)
+     */
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    /**
+     * Relasi ke tugas yang ditugaskan ke user (untuk teknisi)
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Report::class, 'assigned_to');
+    }
 }
