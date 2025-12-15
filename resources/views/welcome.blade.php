@@ -213,7 +213,7 @@
                     <h4 class="font-bold mb-4 text-lg">Kontak</h4>
                     <ul class="space-y-2 text-slate-400">
                         <li class="flex items-center"><i class="fas fa-envelope w-6"></i> admin@polsri.ac.id</li>
-                        <li class="flex items-center"><i class="fas fa-phone w-6"></i> (0711) 353414</li>
+                        <li class="flex items-center"><i class="fas fa-phone w-6"></i> (+62) 821-8627-0228</li>
                         <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Palembang, Indonesia</li>
                     </ul>
                 </div>
