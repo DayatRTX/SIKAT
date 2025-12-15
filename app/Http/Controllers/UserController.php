@@ -176,4 +176,87 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus!');
     }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $activityLogs = \App\Models\ActivityLog::where('user_id', $user->id)
+            ->latest()
+            ->take(10)
+            ->get();
+        
+        $stats = [];
+        if ($user->role === 'mahasiswa') {
+            $stats = [
+                'total_reports' => $user->reports()->count(),
+                'pending' => $user->reports()->where('status', 'pending')->count(),
+                'process' => $user->reports()->where('status', 'process')->count(),
+                'done' => $user->reports()->where('status', 'done')->count(),
+            ];
+        } elseif ($user->role === 'teknisi') {
+            $stats = [
+                'total_tasks' => \App\Models\Report::where('technician_id', $user->id)->count(),
+                'in_progress' => \App\Models\Report::where('technician_id', $user->id)->where('status', 'process')->count(),
+                'completed' => \App\Models\Report::where('technician_id', $user->id)->where('status', 'done')->count(),
+            ];
+        } elseif ($user->role === 'admin') {
+            $stats = [
+                'total_users' => User::count(),
+                'total_reports' => \App\Models\Report::count(),
+                'pending_reports' => \App\Models\Report::where('status', 'pending')->count(),
+            ];
+        }
+
+        return view('profile', compact('user', 'activityLogs', 'stats'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $data = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($validated['password']);
+        }
+
+        $user->update($data);
+
+        \App\Models\ActivityLog::log('profile_updated', 'Memperbarui informasi profil', $user);
+
+        return back()->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user = auth()->user();
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo && \Storage::exists('public/' . $user->photo)) {
+                \Storage::delete('public/' . $user->photo);
+            }
+
+            $path = $request->file('photo')->store('photos', 'public');
+            $user->update(['photo' => $path]);
+
+            \App\Models\ActivityLog::log('photo_updated', 'Memperbarui foto profil', $user);
+
+            return back()->with('success', 'Foto profil berhasil diperbarui!');
+        }
+
+        return back()->with('error', 'Gagal mengupload foto!');
+    }
 }

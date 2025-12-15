@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'photo',
     ];
 
     
@@ -61,5 +62,10 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->hasMany(Report::class, 'assigned_to');
+    }
+
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
     }
 }

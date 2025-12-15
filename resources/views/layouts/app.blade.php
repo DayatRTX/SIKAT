@@ -67,14 +67,22 @@
             <!-- User Profile in Sidebar (Mobile) - Vibrant -->
             <div class="p-4 border-t border-white/30 lg:hidden">
                 <div class="flex items-center space-x-3 mb-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                    </div>
+                    @if(auth()->user()->photo)
+                        <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="{{ auth()->user()->name }}" class="w-10 h-10 rounded-full object-cover shadow-lg border-2 border-white">
+                    @else
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30">
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                        </div>
+                    @endif
                     <div class="flex-1">
                         <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
                         <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
                     </div>
                 </div>
+                <a href="{{ route('profile') }}" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] hover:from-[#9091EB] hover:via-[#8081D9] hover:to-[#7071C9] text-white rounded-xl font-bold text-sm shadow-md shadow-[#B1B2FF]/30 hover:-translate-y-0.5 transition-all duration-300 mb-2">
+                    <i class="fas fa-user"></i>
+                    <span>Profil Saya</span>
+                </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-rose-500 to-red-600 text-white rounded-xl font-bold text-sm shadow-md shadow-rose-500/30 hover:-translate-y-0.5 transition-all duration-300">
@@ -123,8 +131,14 @@
                                 <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
                                 <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
                             </div>
-                            <button @click="dropdownOpen = !dropdownOpen" class="w-11 h-11 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30 hover:scale-110 transition-all duration-300 ring-4 ring-white/60">
-                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            <button @click="dropdownOpen = !dropdownOpen" class="relative group">
+                                @if(auth()->user()->photo)
+                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="{{ auth()->user()->name }}" class="w-11 h-11 rounded-full object-cover shadow-lg ring-4 ring-white/60 hover:scale-110 transition-all duration-300">
+                                @else
+                                    <div class="w-11 h-11 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30 hover:scale-110 transition-all duration-300 ring-4 ring-white/60">
+                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                    </div>
+                                @endif
                             </button>
 
                             <!-- Dropdown -->
@@ -139,9 +153,13 @@
                                 x-transition:leave-end="opacity-0 scale-95"
                                 class="absolute right-0 top-14 w-56 card-glass rounded-2xl shadow-2xl overflow-hidden border border-white/30"
                             >
+                                <a href="{{ route('profile') }}" class="w-full flex items-center space-x-3 px-5 py-3.5 hover:bg-gradient-to-r hover:from-[#B1B2FF]/10 hover:to-[#D2DAFF]/10 transition-all text-slate-700 hover:text-[#9a9bff] font-bold">
+                                    <i class="fas fa-user text-[#9a9bff]"></i>
+                                    <span>Profil Saya</span>
+                                </a>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="w-full flex items-center space-x-3 px-5 py-3.5 hover:bg-gradient-to-r hover:from-rose-50 hover:to-red-50 transition-all text-slate-700 hover:text-rose-600 font-bold">
+                                    <button type="submit" class="w-full flex items-center space-x-3 px-5 py-3.5 hover:bg-gradient-to-r hover:from-rose-50 hover:to-red-50 transition-all text-slate-700 hover:text-rose-600 font-bold border-t border-slate-200">
                                         <i class="fas fa-sign-out-alt text-rose-500"></i>
                                         <span>Logout</span>
                                     </button>

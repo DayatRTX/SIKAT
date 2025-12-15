@@ -54,6 +54,8 @@ class ReportController extends Controller
             'status' => 'pending',
         ]);
 
+        \App\Models\ActivityLog::log('report_created', 'Membuat laporan: ' . $report->title, $report);
+
         return redirect()->route('mahasiswa.reports.index')
             ->with('success', 'Laporan berhasil dikirim dan menunggu validasi admin.');
     }
@@ -129,12 +131,14 @@ class ReportController extends Controller
                 'reject_reason' => $validated['reject_reason'],
                 'completed_at' => null,
             ]);
+            \App\Models\ActivityLog::log('report_rejected', 'Menolak laporan: ' . $report->title, $report);
             $message = 'Laporan berhasil ditolak.';
         } else {
             $report->update([
                 'status' => 'pending', 
                 'completed_at' => null,
             ]);
+            \App\Models\ActivityLog::log('report_validated', 'Memvalidasi laporan: ' . $report->title, $report);
             $message = 'Laporan berhasil divalidasi.';
         }
 
@@ -158,6 +162,8 @@ class ReportController extends Controller
             'status' => 'process',
             'completed_at' => null,
         ]);
+
+        \App\Models\ActivityLog::log('report_assigned', 'Menugaskan teknisi untuk laporan: ' . $report->title, $report);
 
         return back()->with('success', 'Teknisi berhasil ditugaskan.');
     }
@@ -217,6 +223,8 @@ class ReportController extends Controller
             'completed_at' => now(),
         ]);
 
+        \App\Models\ActivityLog::log('report_completed', 'Menyelesaikan perbaikan laporan: ' . $report->title, $report);
+
         return back()->with('success', 'Perbaikan berhasil diselesaikan!');
     }
 
@@ -236,6 +244,8 @@ class ReportController extends Controller
             'reject_reason' => $validated['reject_reason'],
             'completed_at' => null,
         ]);
+
+        \App\Models\ActivityLog::log('report_rejected', 'Menolak laporan: ' . $report->title, $report);
 
         return back()->with('success', 'Laporan berhasil ditolak.');
     }

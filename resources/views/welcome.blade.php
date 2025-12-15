@@ -64,7 +64,7 @@
                     </h1>
                     
                     <p class="text-xl text-slate-600 leading-relaxed">
-                        Laporkan kerusakan fasilitas kampus dengan mudah. Pantau progress perbaikan secara real-time. Bersama kita wujudkan kampus yang nyaman!
+                        Laporkan kerusakan fasilitas kampus dengan mudah. Pantau progress perbaikan kapan saja. Bersama kita wujudkan kampus yang nyaman!
                     </p>
 
                     <!-- CTA Buttons -->
@@ -80,7 +80,7 @@
                     </div>
 
                     <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200">
+                    <div class="grid grid-cols-2 gap-6 pt-8 border-t border-slate-200">
                         <div class="text-center">
                             <div class="text-3xl font-bold text-[#9a9bff]">24/7</div>
                             <div class="text-sm text-slate-600">Sistem Aktif</div>
@@ -88,10 +88,6 @@
                         <div class="text-center">
                             <div class="text-3xl font-bold text-[#9a9bff]">100%</div>
                             <div class="text-sm text-slate-600">Gratis</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-[#9a9bff]">Real-time</div>
-                            <div class="text-sm text-slate-600">Update Status</div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +165,7 @@
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-3">2. Proses Perbaikan</h3>
-                    <p class="text-slate-600">Admin memvalidasi dan menugaskan teknisi. Anda dapat memantau status secara real-time.</p>
+                    <p class="text-slate-600">Admin memvalidasi dan menugaskan teknisi. Pantau status perbaikan kapan saja.</p>
                 </div>
 
                 <!-- Step 3 -->
