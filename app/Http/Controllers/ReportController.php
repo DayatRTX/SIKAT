@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
-    /**
-     * Tampilkan form buat laporan (Mahasiswa).
-     */
+    
+
+
     public function create()
     {
         return view('mahasiswa.reports.create');
     }
 
-    /**
-     * Simpan laporan baru (Mahasiswa).
-     */
+    
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,7 +38,7 @@ class ReportController extends Controller
             'image_before.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
-        // Upload foto
+        
         $imagePath = null;
         if ($request->hasFile('image_before')) {
             $imagePath = $request->file('image_before')->store('reports', 'public');
@@ -58,9 +58,9 @@ class ReportController extends Controller
             ->with('success', 'Laporan berhasil dikirim dan menunggu validasi admin.');
     }
 
-    /**
-     * Tampilkan riwayat laporan mahasiswa.
-     */
+    
+
+
     public function myReports()
     {
         $reports = Report::where('user_id', auth()->id())
@@ -71,12 +71,12 @@ class ReportController extends Controller
         return view('mahasiswa.reports.index', compact('reports'));
     }
 
-    /**
-     * Detail laporan mahasiswa.
-     */
+    
+
+
     public function show(Report $report)
     {
-        // Pastikan mahasiswa hanya bisa lihat laporannya sendiri
+        
         if ($report->user_id !== auth()->id()) {
             abort(403);
         }
@@ -84,14 +84,14 @@ class ReportController extends Controller
         return view('mahasiswa.reports.show', compact('report'));
     }
 
-    /**
-     * Tampilkan semua laporan (Admin).
-     */
+    
+
+
     public function adminIndex(Request $request)
     {
         $query = Report::with(['user', 'technician']);
 
-        // Filter berdasarkan status
+        
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
@@ -101,18 +101,18 @@ class ReportController extends Controller
         return view('admin.reports.index', compact('reports'));
     }
 
-    /**
-     * Detail laporan admin.
-     */
+    
+
+
     public function adminShow(Report $report)
     {
         $technicians = User::where('role', 'teknisi')->get();
         return view('admin.reports.show', compact('report', 'technicians'));
     }
 
-    /**
-     * Validasi laporan (Admin - Terima/Tolak).
-     */
+    
+
+
     public function validate(Request $request, Report $report)
     {
         $validated = $request->validate([
@@ -132,7 +132,7 @@ class ReportController extends Controller
             $message = 'Laporan berhasil ditolak.';
         } else {
             $report->update([
-                'status' => 'pending', // Tetap pending sampai ditugaskan ke teknisi
+                'status' => 'pending', 
                 'completed_at' => null,
             ]);
             $message = 'Laporan berhasil divalidasi.';
@@ -141,9 +141,9 @@ class ReportController extends Controller
         return back()->with('success', $message);
     }
 
-    /**
-     * Assign teknisi ke laporan (Admin).
-     */
+    
+
+
     public function assign(Request $request, Report $report)
     {
         $validated = $request->validate([
@@ -162,9 +162,9 @@ class ReportController extends Controller
         return back()->with('success', 'Teknisi berhasil ditugaskan.');
     }
 
-    /**
-     * Tampilkan tugas teknisi.
-     */
+    
+
+
     public function teknisiIndex()
     {
         $tasks = Report::where('technician_id', auth()->id())
@@ -175,12 +175,12 @@ class ReportController extends Controller
         return view('teknisi.tasks.index', compact('tasks'));
     }
 
-    /**
-     * Detail tugas teknisi.
-     */
+    
+
+
     public function teknisiShow(Report $report)
     {
-        // Pastikan teknisi hanya bisa lihat tugasnya sendiri
+        
         if ($report->technician_id !== auth()->id()) {
             abort(403);
         }
@@ -188,12 +188,12 @@ class ReportController extends Controller
         return view('teknisi.tasks.show', compact('report'));
     }
 
-    /**
-     * Selesaikan perbaikan (Teknisi).
-     */
+    
+
+
     public function complete(Request $request, Report $report)
     {
-        // Pastikan teknisi yang ditugaskan
+        
         if ($report->technician_id !== auth()->id()) {
             abort(403);
         }
@@ -206,7 +206,7 @@ class ReportController extends Controller
             'image_after.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
-        // Upload foto hasil
+        
         $imagePath = null;
         if ($request->hasFile('image_after')) {
             $imagePath = $request->file('image_after')->store('reports', 'public');
@@ -220,9 +220,9 @@ class ReportController extends Controller
         return back()->with('success', 'Perbaikan berhasil diselesaikan!');
     }
 
-    /**
-     * Tolak laporan (Admin).
-     */
+    
+
+
     public function reject(Request $request, Report $report)
     {
         $validated = $request->validate([

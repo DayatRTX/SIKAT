@@ -1,25 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views*.blade.php';
+@source '..*.js';
 
 @theme {
     --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 
-    /* Custom Color Palette - SIKAT Polsri (Soft Blue Theme) */
-    --color-primary: #b1b2ff; /* Soft Blue Primary */
-    --color-primary-light: #c4c5ff; /* Lighter Blue */
-    --color-secondary: #aac4ff; /* Soft Blue Secondary */
-    --color-secondary-light: #bbc5ff; /* Lighter Blue */
-    --color-tertiary: #d2daff; /* Very Light Blue */
-    --color-background: #eef1ff; /* Ultra Light Blue Background */
+    
+    --color-primary: #b1b2ff; 
+    --color-primary-light: #c4c5ff; 
+    --color-secondary: #aac4ff; 
+    --color-secondary-light: #bbc5ff; 
+    --color-tertiary: #d2daff; 
+    --color-background: #eef1ff; 
 
-    /* Accent Colors for Variety */
+    
     --color-accent-pink: #ec4899;
     --color-accent-orange: #f97316;
     --color-accent-emerald: #10b981;
@@ -27,27 +25,27 @@
     --color-accent-rose: #f43f5e;
     --color-accent-indigo: #b1b2ff;
 
-    /* Text Colors - Better Contrast */
+    
     --color-text-dark: #1e293b;
     --color-text-medium: #475569;
     --color-text-light: #64748b;
 
-    /* Blue Palette Text - Darker for Better Readability */
+    
     --color-blue-dark: #9091eb;
     --color-blue-medium: #b1b2ff;
     --color-blue-light: #8384ee;
 
-    /* Yellow/Amber Palette for Accents */
+    
     --color-yellow-dark: #f57c00;
     --color-yellow-medium: #ffa726;
     --color-yellow-light: #ffb74d;
 
-    /* Custom Components */
+    
     --color-primary-hover: #9a9bff;
     --color-secondary-hover: #93b5ff;
 }
 
-/* Custom Utility Classes */
+
 @layer utilities {
     .bg-background {
         background-color: var(--color-background);
@@ -112,11 +110,9 @@
     }
 }
 
-/* ========================================
-   GLASSMORPHISM PREMIUM STYLES
-   ======================================== */
 
-/* Glassmorphism Card Effect */
+
+
 .glass {
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(12px);
@@ -138,7 +134,7 @@
     border: 1px solid rgba(177, 178, 255, 0.3);
 }
 
-/* Premium Shadows */
+
 .shadow-premium {
     box-shadow: 0 8px 32px rgba(177, 178, 255, 0.15);
 }
@@ -147,7 +143,7 @@
     box-shadow: 0 12px 48px rgba(177, 178, 255, 0.2);
 }
 
-/* Gradient Text */
+
 .gradient-text {
     background: linear-gradient(135deg, #b1b2ff 0%, #9091eb 100%);
     -webkit-background-clip: text;
@@ -169,7 +165,7 @@
     background-clip: text;
 }
 
-/* Glass Card with Colored Accent Border */
+
 .glass-card {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
@@ -199,11 +195,9 @@
     border: 1px solid rgba(170, 196, 255, 0.2);
 }
 
-/* ========================================
-   ANIMATIONS & TRANSITIONS
-   ======================================== */
 
-/* Fade In Animation */
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -219,7 +213,7 @@
     animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Staggered Fade In */
+
 .animate-fadeIn-delay-1 {
     animation: fadeIn 0.6s ease-out 0.1s forwards;
     opacity: 0;
@@ -240,7 +234,7 @@
     opacity: 0;
 }
 
-/* Hover Lift Effect */
+
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -250,7 +244,7 @@
     box-shadow: 0 16px 64px rgba(177, 178, 255, 0.25);
 }
 
-/* Button Smooth Hover */
+
 .btn-premium {
     transition: all 0.3s ease;
     background: linear-gradient(135deg, #b1b2ff 0%, #b1b2ff 50%, #aac4ff 100%);
@@ -270,7 +264,7 @@
     transform: translateY(0) scale(1);
 }
 
-/* Colorful Buttons */
+
 .btn-gradient-purple {
     background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
     box-shadow: 0 4px 15px rgba(177, 178, 255, 0.4);
@@ -291,7 +285,7 @@
     box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
-/* Pulse Animation */
+
 @keyframes pulse-glow {
     0%,
     100% {
@@ -306,16 +300,14 @@
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Smooth Scroll */
+
 html {
     scroll-behavior: smooth;
 }
 
-/* ========================================
-   FORM ENHANCEMENTS
-   ======================================== */
 
-/* Floating Label Effect */
+
+
 .form-floating input:focus ~ label,
 .form-floating input:not(:placeholder-shown) ~ label {
     transform: translateY(-1.5rem) scale(0.85);
@@ -330,7 +322,7 @@ html {
     pointer-events: none;
 }
 
-/* Premium Input Focus */
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -340,11 +332,9 @@ select:focus {
     transition: all 0.3s ease;
 }
 
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
 
-/* Gradient Backgrounds */
+
+
 .bg-gradient-primary {
     background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
 }
@@ -362,22 +352,20 @@ select:focus {
     background: radial-gradient(circle at top right, #d2daff, #eef1ff);
 }
 
-/* Text Styles */
+
 .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Border Glow */
+
 .border-glow {
     border: 1px solid rgba(177, 178, 255, 0.3);
     box-shadow: 0 0 20px rgba(177, 178, 255, 0.1);
 }
 
-/* ========================================
-   SOFT GLASSMORPHISM PREMIUM
-   ======================================== */
 
-/* Fade In Up Animation */
+
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -393,7 +381,7 @@ select:focus {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* Pulse Gentle */
+
 @keyframes pulseGentle {
     0%,
     100% {
@@ -408,7 +396,7 @@ select:focus {
     animation: pulseGentle 2s ease-in-out infinite;
 }
 
-/* Hover Card Lift */
+
 .card-hover {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -418,7 +406,7 @@ select:focus {
     box-shadow: 0 20px 60px rgba(177, 178, 255, 0.3);
 }
 
-/* Button Premium Interactive */
+
 .btn-interactive {
     transition: all 0.3s ease;
 }
@@ -431,7 +419,7 @@ select:focus {
     transform: scale(0.95);
 }
 
-/* Table Row Hover */
+
 .table-row-hover {
     transition: all 0.2s ease;
 }
@@ -441,7 +429,7 @@ select:focus {
     transform: scale(1.01);
 }
 
-/* Sidebar Glass */
+
 .sidebar-glass {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px) saturate(180%);
@@ -449,7 +437,7 @@ select:focus {
     border-right: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Navbar Glass */
+
 .navbar-glass {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(24px) saturate(180%);
@@ -457,7 +445,7 @@ select:focus {
     border-bottom: 1px solid rgba(177, 178, 255, 0.2);
 }
 
-/* Card Glass Modern */
+
 .card-glass {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(16px);
@@ -465,7 +453,7 @@ select:focus {
     border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Input Modern */
+
 .input-modern {
     background: rgba(255, 255, 255, 0.6);
     border: 2px solid transparent;
@@ -480,7 +468,7 @@ select:focus {
     transform: translateY(-2px);
 }
 
-/* Badge Modern - Vibrant Gradients */
+
 .badge-pending {
     background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
     box-shadow: 0 4px 12px rgba(251, 191, 36, 0.5);
@@ -509,7 +497,7 @@ select:focus {
     font-weight: 700;
 }
 
-/* Category Badges - Colorful */
+
 .badge-category {
     background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
     color: white;
@@ -517,7 +505,7 @@ select:focus {
     box-shadow: 0 2px 8px rgba(177, 178, 255, 0.3);
 }
 
-/* File Upload Area */
+
 .upload-area {
     background: rgba(255, 255, 255, 0.4);
     border: 2px dashed rgba(177, 178, 255, 0.5);
@@ -536,7 +524,7 @@ select:focus {
     border-style: solid;
 }
 
-/* Stats Icon Background */
+
 .stats-icon-bg {
     background: linear-gradient(
         135deg,
@@ -545,14 +533,14 @@ select:focus {
     );
 }
 
-/* Sidebar Active Item */
+
 .sidebar-active {
     background: linear-gradient(135deg, #b1b2ff 0%, #b1b2ff 50%, #aac4ff 100%);
     box-shadow: 0 4px 16px rgba(177, 178, 255, 0.5);
     color: white;
 }
 
-/* Sidebar Hover */
+
 .sidebar-hover:hover {
     background: linear-gradient(
         135deg,
@@ -561,19 +549,19 @@ select:focus {
     );
 }
 
-/* Mobile Menu */
+
 .mobile-menu {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
 }
 
-/* Scroll Smooth */
+
 * {
     scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar - Vibrant */
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -593,11 +581,9 @@ select:focus {
     background: linear-gradient(135deg, #9a9bff 0%, #93b5ff 100%);
 }
 
-/* ========================================
-   ENHANCED TYPOGRAPHY & COLORS
-   ======================================== */
 
-/* Dark Text for Readability */
+
+
 .text-heading {
     color: #1e293b;
     font-weight: 700;
@@ -611,7 +597,7 @@ select:focus {
     color: #64748b;
 }
 
-/* Vibrant Color Classes */
+
 .text-purple-vibrant {
     color: #9091eb;
 }
@@ -640,7 +626,7 @@ select:focus {
     color: #10b981;
 }
 
-/* Background Accents */
+
 .bg-purple-soft {
     background: linear-gradient(
         135deg,
@@ -673,7 +659,7 @@ select:focus {
     );
 }
 
-/* Icon Containers - Colorful */
+
 .icon-purple {
     background: linear-gradient(135deg, #b1b2ff 0%, #aac4ff 100%);
     box-shadow: 0 4px 12px rgba(177, 178, 255, 0.4);
@@ -704,7 +690,7 @@ select:focus {
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
-/* Decorative Blobs */
+
 .blob-purple {
     background: radial-gradient(
         circle,

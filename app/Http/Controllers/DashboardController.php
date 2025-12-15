@@ -8,15 +8,15 @@ use App\Models\Report;
 
 class DashboardController extends Controller
 {
-    /**
-     * Tampilkan dashboard sesuai role.
-     */
+    
+
+
     public function index()
     {
         $user = auth()->user();
         $weather = $this->getWeatherData();
 
-        // Statistik berdasarkan role
+        
         if ($user->role === 'mahasiswa') {
             $stats = [
                 'total' => Report::where('user_id', $user->id)->count(),
@@ -39,7 +39,7 @@ class DashboardController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->take(5)
                 ->get();
-        } else { // teknisi
+        } else { 
             $stats = [
                 'total' => Report::where('technician_id', $user->id)->count(),
                 'pending' => Report::where('technician_id', $user->id)->where('status', 'pending')->count(),
@@ -56,18 +56,18 @@ class DashboardController extends Controller
         return view('dashboard', compact('stats', 'recentReports', 'weather'));
     }
 
-    /**
-     * Ambil data cuaca dari API.
-     */
+    
+
+
     private function getWeatherData()
     {
         try {
-            // Menggunakan OpenWeatherMap API (gratis)
-            // API Key demo - ganti dengan API key Anda sendiri
-            $apiKey = 'demo'; // Ganti dengan API key yang valid
+            
+            
+            $apiKey = 'demo'; 
             $city = 'Palembang';
             
-            // Fallback data jika API gagal
+            
             $weatherData = [
                 'city' => 'Palembang',
                 'temp' => '28',
@@ -76,28 +76,28 @@ class DashboardController extends Controller
                 'humidity' => '75',
             ];
 
-            // Uncomment ini jika punya API key valid
-            // $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
-            //     'q' => $city,
-            //     'appid' => $apiKey,
-            //     'units' => 'metric',
-            //     'lang' => 'id'
-            // ]);
+            
+            
+            
+            
+            
+            
+            
 
-            // if ($response->successful()) {
-            //     $data = $response->json();
-            //     $weatherData = [
-            //         'city' => $data['name'],
-            //         'temp' => round($data['main']['temp']),
-            //         'description' => ucfirst($data['weather'][0]['description']),
-            //         'icon' => $data['weather'][0]['icon'],
-            //         'humidity' => $data['main']['humidity'],
-            //     ];
-            // }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
             return $weatherData;
         } catch (\Exception $e) {
-            // Return data default jika ada error
+            
             return [
                 'city' => 'Palembang',
                 'temp' => '28',

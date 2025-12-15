@@ -9,17 +9,17 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Tampilkan halaman login.
-     */
+    
+
+
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    /**
-     * Proses login.
-     */
+    
+
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -44,17 +44,17 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Tampilkan halaman register.
-     */
+    
+
+
     public function showRegister()
     {
         return view('auth.register');
     }
 
-    /**
-     * Proses registrasi mahasiswa baru.
-     */
+    
+
+
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -75,7 +75,7 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'mahasiswa', // Default role
+            'role' => 'mahasiswa', 
         ]);
 
         Auth::login($user);
@@ -84,9 +84,9 @@ class AuthController extends Controller
             ->with('success', 'Registrasi berhasil! Selamat datang di SIKAT Polsri.');
     }
 
-    /**
-     * Logout user.
-     */
+    
+
+
     public function logout(Request $request)
     {
         Auth::logout();

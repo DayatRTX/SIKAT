@@ -6,12 +6,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 
-// Halaman Landing Page
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Authentication Routes
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -21,12 +21,12 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Protected Routes - Semua Role
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-// Mahasiswa Routes
+
 Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasiswa.')->group(function () {
     Route::get('/laporan/create', [ReportController::class, 'create'])->name('reports.create');
     Route::post('/laporan', [ReportController::class, 'store'])->name('reports.store');
@@ -34,16 +34,16 @@ Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasi
     Route::get('/laporan/{report}', [ReportController::class, 'show'])->name('reports.show');
 });
 
-// Admin Routes
+
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Report Management
+    
     Route::get('/laporan', [ReportController::class, 'adminIndex'])->name('reports.index');
     Route::get('/laporan/{report}', [ReportController::class, 'adminShow'])->name('reports.show');
     Route::post('/laporan/{report}/validate', [ReportController::class, 'validate'])->name('reports.validate');
     Route::put('/laporan/{report}/assign', [ReportController::class, 'assign'])->name('reports.assign');
     Route::put('/laporan/{report}/reject', [ReportController::class, 'reject'])->name('reports.reject');
 
-    // User Management
+    
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-// Teknisi Routes
+
 Route::middleware(['auth', 'role:teknisi'])->prefix('teknisi')->name('teknisi.')->group(function () {
     Route::get('/tugas', [ReportController::class, 'teknisiIndex'])->name('tasks.index');
     Route::get('/tugas/{report}', [ReportController::class, 'teknisiShow'])->name('tasks.show');

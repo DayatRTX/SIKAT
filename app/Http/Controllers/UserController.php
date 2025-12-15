@@ -9,19 +9,19 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    /**
-     * Tampilkan daftar semua user.
-     */
+    
+
+
     public function index(Request $request)
     {
         $query = User::query();
 
-        // Filter berdasarkan role
+        
         if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
-        // Search berdasarkan nama atau email
+        
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $users = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        // Statistik
+        
         $stats = [
             'total' => User::count(),
             'admin' => User::where('role', 'admin')->count(),
@@ -43,17 +43,17 @@ class UserController extends Controller
         return view('admin.users.index', compact('users', 'stats'));
     }
 
-    /**
-     * Tampilkan form tambah user baru.
-     */
+    
+
+
     public function create()
     {
         return view('admin.users.create');
     }
 
-    /**
-     * Simpan user baru.
-     */
+    
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -82,12 +82,12 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan!');
     }
 
-    /**
-     * Tampilkan detail user.
-     */
+    
+
+
     public function show(User $user)
     {
-        // Hitung statistik laporan user
+        
         $reportStats = [
             'total' => $user->reports()->count(),
             'pending' => $user->reports()->where('status', 'pending')->count(),
@@ -95,7 +95,7 @@ class UserController extends Controller
             'done' => $user->reports()->where('status', 'done')->count(),
         ];
 
-        // Jika teknisi, hitung tugas yang ditangani
+        
         $taskStats = null;
         if ($user->role === 'teknisi') {
             $taskStats = [
@@ -108,17 +108,17 @@ class UserController extends Controller
         return view('admin.users.show', compact('user', 'reportStats', 'taskStats'));
     }
 
-    /**
-     * Tampilkan form edit user.
-     */
+    
+
+
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
     }
 
-    /**
-     * Update data user.
-     */
+    
+
+
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
@@ -142,7 +142,7 @@ class UserController extends Controller
             'role' => $validated['role'],
         ];
 
-        // Update password hanya jika diisi
+        
         if (!empty($validated['password'])) {
             $data['password'] = Hash::make($validated['password']);
         }
@@ -152,22 +152,22 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Data user berhasil diperbarui!');
     }
 
-    /**
-     * Hapus user.
-     */
+    
+
+
     public function destroy(User $user)
     {
-        // Jangan izinkan admin menghapus dirinya sendiri
+        
         if ($user->id === auth()->id()) {
             return back()->with('error', 'Anda tidak dapat menghapus akun sendiri!');
         }
 
-        // Cek apakah user memiliki laporan
+        
         if ($user->reports()->exists()) {
             return back()->with('error', 'User memiliki laporan aktif dan tidak dapat dihapus!');
         }
 
-        // Cek apakah teknisi memiliki tugas
+        
         if ($user->role === 'teknisi' && \App\Models\Report::where('technician_id', $user->id)->exists()) {
             return back()->with('error', 'Teknisi memiliki tugas dan tidak dapat dihapus!');
         }
