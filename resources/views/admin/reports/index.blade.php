@@ -39,8 +39,85 @@
         </div>
     </div>
 
-    <!-- Reports Table - Colorful -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-lg">
+    <!-- Reports - Desktop Table / Mobile Cards -->
+    
+    <!-- Mobile Card View -->
+    <div class="lg:hidden space-y-4">
+        @forelse($reports as $report)
+            <div class="glass-card rounded-2xl p-4 shadow-lg border-l-4 
+                {{ $report->status === 'pending' ? 'border-amber-400' : '' }}
+                {{ $report->status === 'process' ? 'border-cyan-400' : '' }}
+                {{ $report->status === 'done' ? 'border-emerald-400' : '' }}
+                {{ $report->status === 'rejected' ? 'border-rose-400' : '' }}">
+                
+                <div class="flex items-start space-x-3 mb-3">
+                    @if($report->image_before)
+                        <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
+                            <img src="{{ asset('storage/' . $report->image_before) }}" alt="{{ $report->title }}" class="w-full h-full object-cover">
+                        </div>
+                    @else
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center flex-shrink-0 shadow-md">
+                            <i class="fas fa-image text-slate-400 text-xl"></i>
+                        </div>
+                    @endif
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-slate-800 text-sm truncate">{{ $report->title }}</p>
+                        <p class="text-xs text-slate-500">oleh <span class="font-medium text-[#9a9bff]">{{ $report->user->name }}</span></p>
+                        <div class="flex items-center mt-1">
+                            @if($report->status === 'pending')
+                                <span class="px-2 py-0.5 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold rounded-full shadow-sm">
+                                    <i class="fas fa-clock mr-1"></i> Pending
+                                </span>
+                            @elseif($report->status === 'process')
+                                <span class="px-2 py-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs font-bold rounded-full shadow-sm">
+                                    <i class="fas fa-cog fa-spin mr-1"></i> Proses
+                                </span>
+                            @elseif($report->status === 'done')
+                                <span class="px-2 py-0.5 bg-gradient-to-r from-emerald-400 to-green-500 text-white text-xs font-bold rounded-full shadow-sm">
+                                    <i class="fas fa-check mr-1"></i> Selesai
+                                </span>
+                            @else
+                                <span class="px-2 py-0.5 bg-gradient-to-r from-rose-400 to-red-500 text-white text-xs font-bold rounded-full shadow-sm">
+                                    <i class="fas fa-times mr-1"></i> Ditolak
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+                    <div class="bg-slate-50 rounded-lg p-2">
+                        <span class="text-slate-500">Kategori</span>
+                        <p class="font-bold text-[#9a9bff]">{{ $report->category }}</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-2">
+                        <span class="text-slate-500">Tanggal</span>
+                        <p class="font-bold text-slate-700">{{ $report->created_at->format('d M Y') }}</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center text-xs text-slate-600 mb-3">
+                    <i class="fas fa-map-marker-alt mr-2 text-rose-400"></i>
+                    <span class="truncate">{{ $report->location }}</span>
+                </div>
+                
+                <a href="{{ route('admin.reports.show', $report) }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-[#6567dd] to-[#5658cc] text-white text-sm font-bold rounded-xl shadow-md shadow-[#B1B2FF]/30 hover:shadow-lg transition-all duration-300">
+                    <i class="fas fa-eye mr-2"></i> Lihat Detail
+                </a>
+            </div>
+        @empty
+            <div class="glass-card rounded-2xl p-8 text-center shadow-lg">
+                <div class="w-20 h-20 bg-gradient-to-br from-[#6567dd] to-[#5658cc] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#B1B2FF]/30">
+                    <i class="fas fa-inbox text-3xl text-white"></i>
+                </div>
+                <p class="text-slate-800 font-bold text-lg">Belum Ada Laporan</p>
+                <p class="text-slate-500 text-sm mt-1">Semua laporan akan muncul di sini.</p>
+            </div>
+        @endforelse
+    </div>
+
+    <!-- Desktop Table View -->
+    <div class="hidden lg:block glass-card rounded-2xl overflow-hidden shadow-lg">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -140,6 +217,7 @@
         </div>
     </div>
 
+    <!-- Pagination -->
     @if($reports->hasPages())
         <div class="mt-6">
             {{ $reports->links() }}

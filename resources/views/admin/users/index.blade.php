@@ -122,8 +122,88 @@
         </form>
     </div>
 
-    <!-- Users Table -->
-    <div class="glass-card rounded-2xl overflow-hidden shadow-lg">
+    <!-- Users - Desktop Table / Mobile Cards -->
+    
+    <!-- Mobile Card View -->
+    <div class="lg:hidden space-y-4">
+        @forelse($users as $user)
+            @php
+                $roleColors = [
+                    'admin' => ['from-[#B1B2FF]', 'to-[#9091EB]', 'text-white', 'bg-[#B1B2FF]', 'border-violet-400'],
+                    'teknisi' => ['from-emerald-500', 'to-teal-600', 'text-emerald-700', 'bg-emerald-100', 'border-emerald-400'],
+                    'mahasiswa' => ['from-cyan-500', 'to-blue-600', 'text-cyan-700', 'bg-cyan-100', 'border-cyan-400'],
+                ];
+                $color = $roleColors[$user->role] ?? $roleColors['mahasiswa'];
+            @endphp
+            <div class="glass-card rounded-2xl p-4 shadow-lg border-l-4 {{ $color[4] }}">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white font-bold shadow-md text-lg">
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-slate-800 truncate">
+                            {{ $user->name }}
+                            @if($user->id === auth()->id())
+                                <span class="text-xs text-[#9a9bff] font-medium">(Anda)</span>
+                            @endif
+                        </p>
+                        <p class="text-sm text-slate-500 truncate">{{ $user->email }}</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+                    <div class="bg-slate-50 rounded-lg p-2">
+                        <span class="text-slate-500">Role</span>
+                        <p class="font-bold flex items-center mt-0.5">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold {{ $color[2] }} {{ $color[3] }}">
+                                @if($user->role === 'admin')
+                                    <i class="fas fa-user-shield mr-1"></i>
+                                @elseif($user->role === 'teknisi')
+                                    <i class="fas fa-wrench mr-1"></i>
+                                @else
+                                    <i class="fas fa-user-graduate mr-1"></i>
+                                @endif
+                                {{ ucfirst($user->role) }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-2">
+                        <span class="text-slate-500">Terdaftar</span>
+                        <p class="font-bold text-slate-700">{{ $user->created_at->format('d M Y') }}</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-end space-x-2">
+                    <a href="{{ route('admin.users.show', $user) }}" class="flex-1 inline-flex items-center justify-center px-3 py-2 bg-cyan-100 text-cyan-600 rounded-xl hover:bg-cyan-200 transition-all font-bold text-sm">
+                        <i class="fas fa-eye mr-1"></i> Lihat
+                    </a>
+                    <a href="{{ route('admin.users.edit', $user) }}" class="flex-1 inline-flex items-center justify-center px-3 py-2 bg-amber-100 text-amber-600 rounded-xl hover:bg-amber-200 transition-all font-bold text-sm">
+                        <i class="fas fa-edit mr-1"></i> Edit
+                    </a>
+                    @if($user->id !== auth()->id())
+                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="flex-1" onsubmit="return confirm('Yakin ingin menghapus user ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-2 bg-rose-100 text-rose-600 rounded-xl hover:bg-rose-200 transition-all font-bold text-sm">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+        @empty
+            <div class="glass-card rounded-2xl p-8 text-center shadow-lg">
+                <div class="w-20 h-20 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#B1B2FF]/30">
+                    <i class="fas fa-users text-3xl text-white"></i>
+                </div>
+                <p class="text-slate-800 font-bold text-lg">Tidak Ada User</p>
+                <p class="text-slate-500 text-sm mt-1">Belum ada user yang terdaftar.</p>
+            </div>
+        @endforelse
+    </div>
+
+    <!-- Desktop Table View -->
+    <div class="hidden lg:block glass-card rounded-2xl overflow-hidden shadow-lg">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
@@ -215,6 +295,7 @@
         </div>
     </div>
 
+    <!-- Pagination -->
     @if($users->hasPages())
         <div class="mt-6">
             {{ $users->withQueryString()->links() }}

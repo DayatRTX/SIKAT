@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +40,8 @@
         }
     </style>
 </head>
-<body class="h-full overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
-    <div class="h-full grid lg:grid-cols-2">
+<body class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
+    <div class="min-h-screen grid lg:grid-cols-2">
         <!-- Left Panel - Branding -->
         <div class="hidden lg:flex lg:flex-col lg:justify-center lg:items-center relative overflow-hidden bg-gradient-to-br from-[#B1B2FF] via-[#9091EB] to-[#7071C9] p-12">
             <!-- Animated Background Blobs -->
@@ -73,10 +73,10 @@
                 
                 <!-- Title -->
                 <h1 class="text-6xl font-bold text-white mb-6 drop-shadow-lg">
-                    SIKAT Polsri
+                    SIKAT
                 </h1>
                 <p class="text-2xl text-white/90 font-semibold mb-4">
-                    Sistem Informasi Kerusakan Aset
+                    Sistem Informasi Kerusakan Aset dan Tindak Lanjut
                 </p>
                 <p class="text-lg text-white/80 leading-relaxed max-w-md mx-auto">
                     Platform terpadu untuk melaporkan dan memantau perbaikan fasilitas kampus dengan mudah dan transparan
@@ -115,7 +115,7 @@
                     <div class="w-24 h-24 mx-auto bg-gradient-to-br from-[#B1B2FF] to-[#9091EB] rounded-3xl p-3 shadow-xl mb-4 animate-float">
                         <img src="{{ asset('images/icon.jpg') }}" alt="SIKAT" class="w-full h-full object-cover rounded-2xl">
                     </div>
-                    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B1B2FF] to-[#9091EB]">SIKAT Polsri</h1>
+                    <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B1B2FF] to-[#9091EB]">SIKAT</h1>
                 </div>
 
                 <!-- Form Card -->
@@ -244,6 +244,14 @@
                 </p>
             </div>
         </div>
+    </div>
+    
+    <!-- Persistent Background Music -->
+    <div id="bgm-container" class="fixed bottom-6 right-6 z-50" data-turbo-permanent>
+        <button id="bgm-toggle" class="group relative w-14 h-14 bg-gradient-to-br from-[#B1B2FF] to-[#9091EB] rounded-full shadow-2xl hover:shadow-[#B1B2FF]/50 transition-all duration-300 hover:scale-110 flex items-center justify-center">
+            <i id="bgm-icon" class="fas fa-music-slash text-white text-xl"></i>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white shadow-lg opacity-0 transition-opacity duration-300" id="bgm-playing-indicator"></div>
+        </button>
     </div>
 </body>
 </html>

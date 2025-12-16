@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="h-full bg-gradient-to-br from-[#EEF1FF] via-[#D2DAFF] to-[#AAC4FF] overflow-hidden">
-    <div x-data="{ sidebarOpen: false }" class="h-full flex">
+<body class="min-h-screen bg-gradient-to-br from-[#EEF1FF] via-[#D2DAFF] to-[#AAC4FF]">
+    <div x-data="{ sidebarOpen: false }" class="min-h-screen flex">
         <!-- Sidebar Desktop & Mobile -->
         <aside 
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed lg:relative lg:translate-x-0 inset-y-0 left-0 z-50 w-72 sidebar-glass shadow-2xl transition-transform duration-300 ease-in-out flex flex-col"
+            class="fixed lg:sticky lg:top-0 lg:translate-x-0 inset-y-0 left-0 z-50 w-72 h-screen sidebar-glass shadow-2xl transition-transform duration-300 ease-in-out flex flex-col"
         >
             <!-- Logo & Brand - Vibrant -->
             <div class="p-6 border-b border-white/30 relative overflow-hidden">
@@ -25,8 +25,8 @@
                         <img src="{{ asset('images/icon.jpg') }}" alt="SIKAT Polsri Logo" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#4a4bcc] via-[#5658cc] to-[#6567dd] bg-clip-text text-transparent">SIKAT Polsri</h1>
-                        <p class="text-xs text-slate-600 font-bold">Sistem Keluhan & Aduan</p>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-[#4a4bcc] via-[#5658cc] to-[#6567dd] bg-clip-text text-transparent">S I K A T</h1>
+                        <p class="text-xs text-slate-600 font-bold">Kerusakan Aset & Tindak Lanjut</p>
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
         ></div>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <div class="flex-1 flex flex-col min-h-screen">
             <!-- Navbar -->
             <nav class="navbar-glass shadow-lg sticky top-0 z-30">
                 <div class="px-4 sm:px-6 lg:px-8">
@@ -171,7 +171,7 @@
             </nav>
 
             <!-- Main Content -->
-            <main class="flex-1 overflow-y-auto">
+            <main class="flex-1">
                 <div class="p-6 lg:p-8 animate-fadeInUp">
                     <!-- Alert Messages -->
                     @if(session('success'))
@@ -214,262 +214,13 @@
         </div>
     </div>
 
-    @stack('scripts')
-</body>
-</html>
-    <!-- Navbar Glassmorphism -->
-    <nav class="glass-strong shadow-premium sticky top-0 z-50 border-b border-white/30 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo & Brand -->
-                <div class="flex items-center space-x-3 animate-fadeIn">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#B1B2FF]/30 transform hover:scale-110 transition-all duration-300">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold gradient-text">SIKAT Polsri</h1>
-                        <p class="text-xs text-gray-600 font-medium">Sistem Keluhan & Aduan</p>
-                    </div>
-                </div>
-
-                <!-- User Menu -->
-                <div class="flex items-center space-x-4 animate-fadeIn-delay-1">
-                    <div class="text-right hidden md:block">
-                        <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-primary capitalize font-medium">{{ auth()->user()->role }}</p>
-                    </div>
-                    <div class="relative group">
-                        <button class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-[#B1B2FF]/30 hover:scale-110 transition-all duration-300 ring-2 ring-white/50">
-                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                        </button>
-                        <!-- Dropdown -->
-                        <div class="absolute right-0 mt-2 w-48 glass-strong rounded-xl shadow-premium-lg border border-white/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2">
-                            <div class="py-2">
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-white/50 transition-all flex items-center space-x-2 rounded-lg font-medium">
-                                        <i class="fas fa-sign-out-alt text-primary"></i>
-                                        <span>Logout</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Layout with Sidebar -->
-    <div class="flex min-h-screen">
-        <!-- Sidebar Glassmorphism -->
-        <aside class="w-64 glass border-r border-white/30 shadow-premium m-4 rounded-2xl animate-fadeIn-delay-2">
-            <div class="p-6">
-                <nav class="space-y-2">
-                    <a href="{{ route('dashboard') }}" class="group flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 {{ request()->routeIs('dashboard') ? 'bg-gradient-primary text-white shadow-premium' : 'text-gray-700 hover:bg-white/50' }}">
-                        <i class="fas fa-home {{ request()->routeIs('dashboard') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
-                        <span class="font-semibold">Dashboard</span>
-                    </a>
-
-                    @if(auth()->user()->role === 'mahasiswa')
-                        <a href="{{ route('mahasiswa.reports.create') }}" class="group flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 {{ request()->routeIs('mahasiswa.reports.create') ? 'bg-gradient-primary text-white shadow-premium' : 'text-gray-700 hover:bg-white/50' }}">
-                            <i class="fas fa-plus-circle {{ request()->routeIs('mahasiswa.reports.create') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
-                            <span class="font-semibold">Buat Laporan</span>
-                        </a>
-                        <a href="{{ route('mahasiswa.reports.index') }}" class="group flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 {{ request()->routeIs('mahasiswa.reports.index') ? 'bg-gradient-primary text-white shadow-premium' : 'text-gray-700 hover:bg-white/50' }}">
-                            <i class="fas fa-list {{ request()->routeIs('mahasiswa.reports.index') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
-                            <span class="font-semibold">Riwayat Laporan</span>
-                        </a>
-                    @elseif(auth()->user()->role === 'admin')
-                        <a href="{{ route('admin.reports.index') }}" class="group flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.reports.*') ? 'bg-gradient-primary text-white shadow-premium' : 'text-gray-700 hover:bg-white/50' }}">
-                            <i class="fas fa-clipboard-list {{ request()->routeIs('admin.reports.*') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
-                            <span class="font-semibold">Kelola Laporan</span>
-                        </a>
-                    @elseif(auth()->user()->role === 'teknisi')
-                        <a href="{{ route('teknisi.tasks.index') }}" class="group flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 {{ request()->routeIs('teknisi.tasks.*') ? 'bg-gradient-primary text-white shadow-premium' : 'text-gray-700 hover:bg-white/50' }}">
-                            <i class="fas fa-tasks {{ request()->routeIs('teknisi.tasks.*') ? '' : 'group-hover:scale-110 transition-transform' }}"></i>
-                            <span class="font-semibold">Tugas Perbaikan</span>
-                        </a>
-                    @endif
-                </nav>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 p-8 animate-fadeIn-delay-3">
-            <!-- Alert Messages -->
-            @if(session('success'))
-                <div class="mb-6 glass-strong border-l-4 border-green-500 text-green-700 p-5 rounded-xl shadow-premium animate-fadeIn">
-                    <div class="flex items-center">
-                        <i class="fas fa-check-circle mr-3 text-xl"></i>
-                        <span class="font-semibold">{{ session('success') }}</span>
-                    </div>
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mb-6 glass-strong border-l-4 border-red-500 text-red-700 p-5 rounded-xl shadow-premium animate-fadeIn">
-                    <div class="flex items-center">
-                        <i class="fas fa-exclamation-circle mr-3 text-xl"></i>
-                        <span class="font-semibold">{{ session('error') }}</span>
-                    </div>
-                </div>
-            @endif
-
-            @if($errors->any())
-                <div class="mb-6 glass-strong border-l-4 border-red-500 text-red-700 p-5 rounded-xl shadow-premium animate-fadeIn">
-                    <div class="flex items-start">
-                        <i class="fas fa-exclamation-triangle mr-3 mt-1 text-xl"></i>
-                        <div>
-                            <p class="font-bold mb-2 text-lg">Terdapat kesalahan:</p>
-                            <ul class="list-disc list-inside space-y-1">
-                                @foreach($errors->all() as $error)
-                                    <li class="font-medium">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            @yield('content')
-        </main>
+    <!-- Persistent Background Music - data-turbo-permanent keeps this alive during navigation -->
+    <div id="bgm-container" class="fixed bottom-6 right-6 z-50" data-turbo-permanent>
+        <button id="bgm-toggle" class="group relative w-14 h-14 bg-gradient-to-br from-[#B1B2FF] to-[#9091EB] rounded-full shadow-2xl hover:shadow-[#B1B2FF]/50 transition-all duration-300 hover:scale-110 flex items-center justify-center">
+            <i id="bgm-icon" class="fas fa-music-slash text-white text-xl"></i>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white shadow-lg opacity-0 transition-opacity duration-300" id="bgm-playing-indicator"></div>
+        </button>
     </div>
-
-    <!-- Footer Glassmorphism -->
-    <footer class="glass-strong border-t border-white/30 py-6 shadow-premium">
-        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
-            <p class="font-medium">&copy; 2025 SIKAT Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
-            <p class="text-xs text-gray-500 mt-1">Dibuat dengan ❤️ untuk kampus yang lebih baik</p>
-        </div>
-    </footer>
-
-    @stack('scripts')
-</body>
-</html>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo & Brand -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-lg flex items-center justify-center shadow-lg shadow-[#B1B2FF]/30">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-800">SIKAT Polsri</h1>
-                        <p class="text-xs text-gray-500">Sistem Keluhan & Aduan</p>
-                    </div>
-                </div>
-
-                <!-- User Menu -->
-                <div class="flex items-center space-x-4">
-                    <div class="text-right hidden md:block">
-                        <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-gray-500 capitalize">{{ auth()->user()->role }}</p>
-                    </div>
-                    <div class="relative group">
-                        <button class="w-10 h-10 bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] rounded-full flex items-center justify-center text-white font-semibold shadow-lg shadow-[#B1B2FF]/30 hover:from-[#5658cc] hover:to-[#3e3fbb] transition-all">
-                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                        </button>
-                        <!-- Dropdown -->
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-tertiary opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                            <div class="py-2">
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-tertiary transition-all flex items-center space-x-2">
-                                        <i class="fas fa-sign-out-alt"></i>
-                                        <span>Logout</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Layout with Sidebar -->
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-lg border-r border-tertiary">
-            <div class="p-6">
-                <nav class="space-y-2">
-                    <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-tertiary transition-all {{ request()->routeIs('dashboard') ? 'bg-primary text-white' : 'text-gray-700' }}">
-                        <i class="fas fa-home"></i>
-                        <span class="font-medium">Dashboard</span>
-                    </a>
-
-                    @if(auth()->user()->role === 'mahasiswa')
-                        <a href="{{ route('mahasiswa.reports.create') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-tertiary transition-all {{ request()->routeIs('mahasiswa.reports.create') ? 'bg-primary text-white' : 'text-gray-700' }}">
-                            <i class="fas fa-plus-circle"></i>
-                            <span class="font-medium">Buat Laporan</span>
-                        </a>
-                        <a href="{{ route('mahasiswa.reports.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-tertiary transition-all {{ request()->routeIs('mahasiswa.reports.index') ? 'bg-primary text-white' : 'text-gray-700' }}">
-                            <i class="fas fa-list"></i>
-                            <span class="font-medium">Riwayat Laporan</span>
-                        </a>
-                    @elseif(auth()->user()->role === 'admin')
-                        <a href="{{ route('admin.reports.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-tertiary transition-all {{ request()->routeIs('admin.reports.*') ? 'bg-primary text-white' : 'text-gray-700' }}">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span class="font-medium">Kelola Laporan</span>
-                        </a>
-                    @elseif(auth()->user()->role === 'teknisi')
-                        <a href="{{ route('teknisi.tasks.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-tertiary transition-all {{ request()->routeIs('teknisi.tasks.*') ? 'bg-primary text-white' : 'text-gray-700' }}">
-                            <i class="fas fa-tasks"></i>
-                            <span class="font-medium">Tugas Perbaikan</span>
-                        </a>
-                    @endif
-                </nav>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 p-6">
-            <!-- Alert Messages -->
-            @if(session('success'))
-                <div class="mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-md animate-pulse">
-                    <div class="flex items-center">
-                        <i class="fas fa-check-circle mr-3"></i>
-                        <span>{{ session('success') }}</span>
-                    </div>
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md">
-                    <div class="flex items-center">
-                        <i class="fas fa-exclamation-circle mr-3"></i>
-                        <span>{{ session('error') }}</span>
-                    </div>
-                </div>
-            @endif
-
-            @if($errors->any())
-                <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md">
-                    <div class="flex items-start">
-                        <i class="fas fa-exclamation-triangle mr-3 mt-1"></i>
-                        <div>
-                            <p class="font-semibold mb-2">Terdapat kesalahan:</p>
-                            <ul class="list-disc list-inside">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            @yield('content')
-        </main>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-tertiary py-4">
-        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
-            <p>&copy; 2024 SIKAT Polsri - Politeknik Negeri Sriwijaya. All rights reserved.</p>
-        </div>
-    </footer>
 
     @stack('scripts')
 </body>

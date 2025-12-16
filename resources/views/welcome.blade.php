@@ -21,7 +21,7 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#9a9bff] to-[#c4c5ff]">
-                            SIKAT Polsri
+                            SIKAT
                         </h1>
                         <p class="text-xs text-slate-500 hidden md:block">Sistem Informasi Kerusakan Aset dan Tindak lanjut</p>
                     </div>
@@ -500,7 +500,7 @@
                 <div>
                     <h4 class="font-bold mb-4 text-lg">Kontak</h4>
                     <ul class="space-y-2 text-slate-400">
-                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> admin@polsri.ac.id</li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> atmin@sikat.com</li>
                         <li class="flex items-center"><i class="fas fa-phone w-6"></i> (+62) 821-8627-0228</li>
                         <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Palembang, Indonesia</li>
                     </ul>
@@ -512,5 +512,13 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Persistent Background Music -->
+    <div id="bgm-container" class="fixed bottom-6 right-6 z-50" data-turbo-permanent>
+        <button id="bgm-toggle" class="group relative w-14 h-14 bg-gradient-to-br from-[#B1B2FF] to-[#9091EB] rounded-full shadow-2xl hover:shadow-[#B1B2FF]/50 transition-all duration-300 hover:scale-110 flex items-center justify-center">
+            <i id="bgm-icon" class="fas fa-music-slash text-white text-xl"></i>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white shadow-lg opacity-0 transition-opacity duration-300" id="bgm-playing-indicator"></div>
+        </button>
+    </div>
 </body>
 </html>
