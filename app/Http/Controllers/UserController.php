@@ -87,7 +87,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        
+        // Report Stats
         $reportStats = [
             'total' => $user->reports()->count(),
             'pending' => $user->reports()->where('status', 'pending')->count(),
@@ -95,7 +95,7 @@ class UserController extends Controller
             'done' => $user->reports()->where('status', 'done')->count(),
         ];
 
-        
+        // Task Stats for Teknisi
         $taskStats = null;
         if ($user->role === 'teknisi') {
             $taskStats = [
@@ -105,7 +105,13 @@ class UserController extends Controller
             ];
         }
 
-        return view('admin.users.show', compact('user', 'reportStats', 'taskStats'));
+        // Activity Logs
+        $activities = \App\Models\ActivityLog::where('user_id', $user->id)
+            ->latest()
+            ->take(10)
+            ->get();
+
+        return view('admin.users.show', compact('user', 'reportStats', 'taskStats', 'activities'));
     }
 
     

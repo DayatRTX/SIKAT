@@ -32,9 +32,15 @@
                 <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br {{ $color[0] }}/20 {{ $color[1] }}/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
                 
                 <div class="relative z-10">
-                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white text-4xl font-bold shadow-lg {{ $color[4] }} mx-auto mb-4">
-                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                    </div>
+                    @if($user->photo)
+                        <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-lg {{ $color[4] }} mx-auto mb-4">
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+                        </div>
+                    @else
+                        <div class="w-24 h-24 rounded-2xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white text-4xl font-bold shadow-lg {{ $color[4] }} mx-auto mb-4">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
+                    @endif
                     
                     <h2 class="text-xl font-bold text-slate-800 mb-1">{{ $user->name }}</h2>
                     <p class="text-sm text-slate-500 mb-3">{{ $user->email }}</p>
@@ -205,7 +211,7 @@
             </div>
             @endif
 
-            <!-- Activity Timeline Placeholder -->
+            <!-- Activity Timeline -->
             <div class="glass-card rounded-2xl p-6 shadow-lg">
                 <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f7f8ff]0 to-pink-600 flex items-center justify-center text-white mr-3 shadow-lg shadow-[#f7f8ff]0/30">
@@ -214,10 +220,39 @@
                     Aktivitas Terbaru
                 </h3>
                 
-                <div class="text-center py-8 text-slate-400">
-                    <i class="fas fa-clock text-4xl mb-3"></i>
-                    <p class="text-sm font-medium">Fitur log aktivitas akan datang</p>
-                </div>
+                @if($activities && $activities->count() > 0)
+                    <div class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                        @foreach($activities as $activity)
+                            @php
+                                $activityIcons = [
+                                    'create_report' => ['icon' => 'fa-plus-circle', 'color' => 'from-emerald-500 to-green-600', 'bg' => 'bg-emerald-100', 'text' => 'text-emerald-600'],
+                                    'update_report' => ['icon' => 'fa-edit', 'color' => 'from-amber-500 to-orange-600', 'bg' => 'bg-amber-100', 'text' => 'text-amber-600'],
+                                    'validate_report' => ['icon' => 'fa-check-circle', 'color' => 'from-cyan-500 to-blue-600', 'bg' => 'bg-cyan-100', 'text' => 'text-cyan-600'],
+                                    'reject_report' => ['icon' => 'fa-times-circle', 'color' => 'from-rose-500 to-red-600', 'bg' => 'bg-rose-100', 'text' => 'text-rose-600'],
+                                    'assign_technician' => ['icon' => 'fa-user-plus', 'color' => 'from-[#B1B2FF] to-[#9091EB]', 'bg' => 'bg-[#ebebff]', 'text' => 'text-[#9a9bff]'],
+                                    'complete_task' => ['icon' => 'fa-wrench', 'color' => 'from-emerald-500 to-teal-600', 'bg' => 'bg-emerald-100', 'text' => 'text-emerald-600'],
+                                    'update_profile' => ['icon' => 'fa-user-edit', 'color' => 'from-slate-500 to-slate-700', 'bg' => 'bg-slate-100', 'text' => 'text-slate-600'],
+                                    'login' => ['icon' => 'fa-sign-in-alt', 'color' => 'from-[#B1B2FF] to-[#9091EB]', 'bg' => 'bg-[#ebebff]', 'text' => 'text-[#9a9bff]'],
+                                ];
+                                $activityStyle = $activityIcons[$activity->action] ?? ['icon' => 'fa-circle', 'color' => 'from-slate-400 to-slate-500', 'bg' => 'bg-slate-100', 'text' => 'text-slate-500'];
+                            @endphp
+                            <div class="flex items-start space-x-3 p-3 rounded-xl {{ $activityStyle['bg'] }} hover:shadow-md transition-all">
+                                <div class="w-8 h-8 rounded-lg bg-gradient-to-br {{ $activityStyle['color'] }} flex items-center justify-center text-white flex-shrink-0 shadow-md">
+                                    <i class="fas {{ $activityStyle['icon'] }} text-xs"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold {{ $activityStyle['text'] }} truncate">{{ $activity->description }}</p>
+                                    <p class="text-xs text-slate-500 mt-0.5">{{ $activity->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-8 text-slate-400">
+                        <i class="fas fa-clock text-4xl mb-3"></i>
+                        <p class="text-sm font-medium">Belum ada aktivitas tercatat</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
