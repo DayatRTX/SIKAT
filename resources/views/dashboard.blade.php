@@ -34,56 +34,61 @@
         </div>
     </div>
 
-    <!-- Stats Grid - Colorful Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <!-- Total Laporan - Purple -->
-        <div class="glass-card rounded-2xl p-4 md:p-5 shadow-md hover:shadow-xl transition-all duration-300 group border-l-4 border-[#B1B2FF]">
-            <div class="flex items-center space-x-3 md:space-x-4">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] flex items-center justify-center text-white shadow-lg shadow-[#B1B2FF]/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-clipboard-list text-xl md:text-2xl"></i>
+    <!-- Stats Bar - Single Row Compact -->
+    <div class="glass-card rounded-2xl p-4 shadow-lg">
+        <div class="flex items-center justify-between divide-x divide-slate-200">
+            <!-- Total -->
+            <div class="flex-1 flex items-center justify-center gap-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-clipboard-list text-sm"></i>
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total</p>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800">{{ $stats['total'] }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pending - Orange/Amber -->
-        <div class="glass-card rounded-2xl p-4 md:p-5 shadow-md hover:shadow-xl transition-all duration-300 group border-l-4 border-amber-500">
-            <div class="flex items-center space-x-3 md:space-x-4">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-clock text-xl md:text-2xl"></i>
-                </div>
-                <div>
-                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Pending</p>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800">{{ $stats['pending'] }}</h3>
+                <div class="text-center">
+                    <h3 class="text-2xl font-extrabold text-slate-800">{{ $stats['total'] }}</h3>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Total</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Proses - Cyan/Blue -->
-        <div class="glass-card rounded-2xl p-4 md:p-5 shadow-md hover:shadow-xl transition-all duration-300 group border-l-4 border-cyan-500">
-            <div class="flex items-center space-x-3 md:space-x-4">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-cog fa-spin text-xl md:text-2xl"></i>
+            <!-- Pending -->
+            <div class="flex-1 flex items-center justify-center gap-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-clock text-sm"></i>
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Proses</p>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800">{{ $stats['process'] }}</h3>
+                <div class="text-center">
+                    <h3 class="text-2xl font-extrabold text-slate-800">{{ $stats['pending'] }}</h3>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Pending</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Selesai - Emerald/Green -->
-        <div class="glass-card rounded-2xl p-4 md:p-5 shadow-md hover:shadow-xl transition-all duration-300 group border-l-4 border-emerald-500">
-            <div class="flex items-center space-x-3 md:space-x-4">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i class="fas fa-check-circle text-xl md:text-2xl"></i>
+            <!-- Proses -->
+            <div class="flex-1 flex items-center justify-center gap-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-cog fa-spin text-sm"></i>
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Selesai</p>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800">{{ $stats['done'] }}</h3>
+                <div class="text-center">
+                    <h3 class="text-2xl font-extrabold text-slate-800">{{ $stats['process'] }}</h3>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Proses</p>
+                </div>
+            </div>
+
+            <!-- Selesai -->
+            <div class="flex-1 flex items-center justify-center gap-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-check-circle text-sm"></i>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-2xl font-extrabold text-slate-800">{{ $stats['done'] }}</h3>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Selesai</p>
+                </div>
+            </div>
+
+            <!-- Ditolak -->
+            <div class="flex-1 flex items-center justify-center gap-3 px-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400 to-red-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-times-circle text-sm"></i>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-2xl font-extrabold text-slate-800">{{ $stats['rejected'] }}</h3>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Ditolak</p>
                 </div>
             </div>
         </div>
@@ -91,6 +96,12 @@
 
     <!-- Chart Section -->
     <div class="glass-card rounded-2xl shadow-lg overflow-hidden">
+        <style>
+            .chart-toggle-btn { background: rgba(255, 255, 255, 0.6); color: #64748b; border: 2px solid transparent; }
+            .chart-toggle-btn:hover { background: rgba(177, 178, 255, 0.2); color: #6366f1; }
+            .chart-toggle-btn.active { background: linear-gradient(135deg, #B1B2FF 0%, #9091EB 100%); color: white; box-shadow: 0 4px 15px rgba(177, 178, 255, 0.4); }
+            #mainChart { transition: opacity 0.3s ease; }
+        </style>
         <div class="p-6 border-b border-slate-200/50 bg-gradient-to-r from-[#B1B2FF]/5 to-cyan-500/5">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <h2 class="text-lg font-bold text-slate-800 flex items-center">
@@ -136,6 +147,140 @@
                 <span id="chart-description">Distribusi status laporan</span>
             </div>
         </div>
+        
+        <!-- INLINE SCRIPT - Chart initialization -->
+        <script>
+            (function() {
+                // Chart Data from Controller
+                const chartStatus = @json($chartStatus);
+                const chartCategory = @json($chartCategory);
+                const chartTrend = @json($chartTrend);
+                
+                let mainChart = null;
+                let currentChartType = 'donut';
+                
+                const chartDescriptions = {
+                    'donut': 'Distribusi status laporan (Pending, Proses, Selesai)',
+                    'bar': 'Perbandingan jumlah berdasarkan status',
+                    'line': 'Trend laporan 30 hari terakhir',
+                    'category': 'Distribusi laporan berdasarkan kategori'
+                };
+                
+                // Make changeChart global so onclick works
+                window.changeChart = function(type) {
+                    if (type === currentChartType && mainChart) return;
+                    
+                    localStorage.setItem('sikat_chart_type', type);
+                    currentChartType = type;
+                    
+                    const loading = document.getElementById('chart-loading');
+                    const canvas = document.getElementById('mainChart');
+                    
+                    canvas.style.opacity = '0';
+                    loading.style.opacity = '1';
+                    
+                    document.querySelectorAll('.chart-toggle-btn').forEach(btn => btn.classList.remove('active'));
+                    document.getElementById('btn-' + type).classList.add('active');
+                    document.getElementById('chart-description').textContent = chartDescriptions[type];
+                    
+                    setTimeout(function() {
+                        if (mainChart) {
+                            mainChart.destroy();
+                            mainChart = null;
+                        }
+                        renderChart(type);
+                        canvas.style.opacity = '1';
+                        loading.style.opacity = '0';
+                    }, 300);
+                };
+                
+                function renderChart(type) {
+                    const ctx = document.getElementById('mainChart').getContext('2d');
+                    let config;
+                    
+                    if (type === 'donut') {
+                        config = {
+                            type: 'doughnut',
+                            data: {
+                                labels: chartStatus.labels,
+                                datasets: [{ data: chartStatus.data, backgroundColor: chartStatus.colors, borderWidth: 0, hoverOffset: 10 }]
+                            },
+                            options: {
+                                responsive: true, maintainAspectRatio: false, cutout: '65%',
+                                plugins: { legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, font: { weight: 'bold' } } } },
+                                animation: { animateRotate: true, animateScale: true, duration: 800, easing: 'easeOutQuart' }
+                            }
+                        };
+                    } else if (type === 'bar') {
+                        config = {
+                            type: 'bar',
+                            data: {
+                                labels: chartStatus.labels,
+                                datasets: [{ label: 'Jumlah Laporan', data: chartStatus.data, backgroundColor: chartStatus.colors.map(c => c + 'CC'), borderColor: chartStatus.colors, borderWidth: 2, borderRadius: 8, borderSkipped: false }]
+                            },
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { weight: 'bold' } } }, x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } } },
+                                animation: { duration: 800, easing: 'easeOutQuart' }
+                            }
+                        };
+                    } else if (type === 'line') {
+                        config = {
+                            type: 'line',
+                            data: {
+                                labels: chartTrend.labels,
+                                datasets: [{ label: 'Laporan', data: chartTrend.data, borderColor: '#B1B2FF', backgroundColor: 'rgba(177, 178, 255, 0.1)', borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: '#B1B2FF', pointBorderColor: '#fff', pointBorderWidth: 2, pointRadius: 4, pointHoverRadius: 6 }]
+                            },
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { weight: 'bold' } } }, x: { grid: { display: false }, ticks: { font: { weight: 'bold', size: 10 }, maxRotation: 45, minRotation: 45 } } },
+                                animation: { duration: 800, easing: 'easeOutQuart' }
+                            }
+                        };
+                    } else if (type === 'category') {
+                        config = {
+                            type: 'bar',
+                            data: {
+                                labels: chartCategory.labels,
+                                datasets: [{ label: 'Jumlah', data: chartCategory.data, backgroundColor: chartCategory.colors.slice(0, chartCategory.labels.length).map(c => c + 'CC'), borderColor: chartCategory.colors.slice(0, chartCategory.labels.length), borderWidth: 2, borderRadius: 8, borderSkipped: false }]
+                            },
+                            options: {
+                                indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                scales: { x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { weight: 'bold' } } }, y: { grid: { display: false }, ticks: { font: { weight: 'bold' } } } },
+                                animation: { duration: 800, easing: 'easeOutQuart' }
+                            }
+                        };
+                    }
+                    
+                    mainChart = new Chart(ctx, config);
+                }
+                
+                // Initialize on load
+                function init() {
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(init, 50);
+                        return;
+                    }
+                    
+                    const savedType = localStorage.getItem('sikat_chart_type') || 'donut';
+                    currentChartType = savedType;
+                    
+                    document.querySelectorAll('.chart-toggle-btn').forEach(btn => btn.classList.remove('active'));
+                    const activeBtn = document.getElementById('btn-' + savedType);
+                    if (activeBtn) activeBtn.classList.add('active');
+                    
+                    const descEl = document.getElementById('chart-description');
+                    if (descEl) descEl.textContent = chartDescriptions[savedType];
+                    
+                    renderChart(savedType);
+                }
+                
+                init();
+            })();
+        </script>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -272,289 +417,5 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-<style>
-    .chart-toggle-btn {
-        background: rgba(255, 255, 255, 0.6);
-        color: #64748b;
-        border: 2px solid transparent;
-    }
-    .chart-toggle-btn:hover {
-        background: rgba(177, 178, 255, 0.2);
-        color: #6366f1;
-    }
-    .chart-toggle-btn.active {
-        background: linear-gradient(135deg, #B1B2FF 0%, #9091EB 100%);
-        color: white;
-        box-shadow: 0 4px 15px rgba(177, 178, 255, 0.4);
-    }
-    
-    #mainChart {
-        transition: opacity 0.3s ease;
-    }
-    
-    .chart-fade-out {
-        opacity: 0;
-    }
-    
-    .chart-fade-in {
-        opacity: 1;
-    }
-</style>
-
-<script>
-    // Chart Data from Controller
-    const chartStatus = @json($chartStatus);
-    const chartCategory = @json($chartCategory);
-    const chartTrend = @json($chartTrend);
-    
-    let mainChart = null;
-    let currentChartType = localStorage.getItem('sikat_chart_type') || 'donut';
-    
-    // Chart descriptions
-    const chartDescriptions = {
-        'donut': 'Distribusi status laporan (Pending, Proses, Selesai)',
-        'bar': 'Perbandingan jumlah berdasarkan status',
-        'line': 'Trend laporan 30 hari terakhir',
-        'category': 'Distribusi laporan berdasarkan kategori'
-    };
-    
-    // Initialize chart on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        initChart();
-    });
-    
-    function initChart() {
-        // Set active button
-        updateToggleButtons(currentChartType);
-        // Render chart
-        renderChart(currentChartType);
-    }
-    
-    function changeChart(type) {
-        if (type === currentChartType) return;
-        
-        // Save preference
-        localStorage.setItem('sikat_chart_type', type);
-        currentChartType = type;
-        
-        // Show loading animation
-        const container = document.getElementById('chart-container');
-        const loading = document.getElementById('chart-loading');
-        const canvas = document.getElementById('mainChart');
-        
-        // Fade out
-        canvas.classList.add('chart-fade-out');
-        loading.style.opacity = '1';
-        loading.style.pointerEvents = 'auto';
-        
-        // Update buttons
-        updateToggleButtons(type);
-        
-        // Destroy and recreate after animation
-        setTimeout(() => {
-            if (mainChart) {
-                mainChart.destroy();
-                mainChart = null;
-            }
-            
-            renderChart(type);
-            
-            // Fade in
-            setTimeout(() => {
-                canvas.classList.remove('chart-fade-out');
-                canvas.classList.add('chart-fade-in');
-                loading.style.opacity = '0';
-                loading.style.pointerEvents = 'none';
-            }, 100);
-        }, 300);
-    }
-    
-    function updateToggleButtons(activeType) {
-        document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        document.getElementById('btn-' + activeType).classList.add('active');
-        document.getElementById('chart-description').textContent = chartDescriptions[activeType];
-    }
-    
-    function renderChart(type) {
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        
-        let config;
-        
-        switch(type) {
-            case 'donut':
-                config = {
-                    type: 'doughnut',
-                    data: {
-                        labels: chartStatus.labels,
-                        datasets: [{
-                            data: chartStatus.data,
-                            backgroundColor: chartStatus.colors,
-                            borderWidth: 0,
-                            hoverOffset: 10
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '65%',
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20,
-                                    usePointStyle: true,
-                                    font: { weight: 'bold' }
-                                }
-                            }
-                        },
-                        animation: {
-                            animateRotate: true,
-                            animateScale: true,
-                            duration: 800,
-                            easing: 'easeOutQuart'
-                        }
-                    }
-                };
-                break;
-                
-            case 'bar':
-                config = {
-                    type: 'bar',
-                    data: {
-                        labels: chartStatus.labels,
-                        datasets: [{
-                            label: 'Jumlah Laporan',
-                            data: chartStatus.data,
-                            backgroundColor: chartStatus.colors.map(c => c + 'CC'),
-                            borderColor: chartStatus.colors,
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: 'rgba(0,0,0,0.05)' },
-                                ticks: { font: { weight: 'bold' } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { font: { weight: 'bold' } }
-                            }
-                        },
-                        animation: {
-                            duration: 800,
-                            easing: 'easeOutQuart'
-                        }
-                    }
-                };
-                break;
-                
-            case 'line':
-                config = {
-                    type: 'line',
-                    data: {
-                        labels: chartTrend.labels,
-                        datasets: [{
-                            label: 'Laporan',
-                            data: chartTrend.data,
-                            borderColor: '#B1B2FF',
-                            backgroundColor: 'rgba(177, 178, 255, 0.1)',
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4,
-                            pointBackgroundColor: '#B1B2FF',
-                            pointBorderColor: '#fff',
-                            pointBorderWidth: 2,
-                            pointRadius: 4,
-                            pointHoverRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: 'rgba(0,0,0,0.05)' },
-                                ticks: { font: { weight: 'bold' } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { 
-                                    font: { weight: 'bold', size: 10 },
-                                    maxRotation: 45,
-                                    minRotation: 45
-                                }
-                            }
-                        },
-                        animation: {
-                            duration: 800,
-                            easing: 'easeOutQuart'
-                        }
-                    }
-                };
-                break;
-                
-            case 'category':
-                config = {
-                    type: 'bar',
-                    data: {
-                        labels: chartCategory.labels,
-                        datasets: [{
-                            label: 'Jumlah',
-                            data: chartCategory.data,
-                            backgroundColor: chartCategory.colors.slice(0, chartCategory.labels.length).map(c => c + 'CC'),
-                            borderColor: chartCategory.colors.slice(0, chartCategory.labels.length),
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                grid: { color: 'rgba(0,0,0,0.05)' },
-                                ticks: { font: { weight: 'bold' } }
-                            },
-                            y: {
-                                grid: { display: false },
-                                ticks: { font: { weight: 'bold' } }
-                            }
-                        },
-                        animation: {
-                            duration: 800,
-                            easing: 'easeOutQuart'
-                        }
-                    }
-                };
-                break;
-        }
-        
-        mainChart = new Chart(ctx, config);
-    }
-</script>
-@endpush
 
 @endsection

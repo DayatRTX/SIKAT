@@ -29,6 +29,7 @@ class DashboardController extends Controller
             'pending' => (clone $baseQuery)->where('status', 'pending')->count(),
             'process' => (clone $baseQuery)->where('status', 'process')->count(),
             'done' => (clone $baseQuery)->where('status', 'done')->count(),
+            'rejected' => (clone $baseQuery)->where('status', 'rejected')->count(),
         ];
 
         // Recent Reports
@@ -40,9 +41,9 @@ class DashboardController extends Controller
 
         // Chart Data - Status Distribution
         $chartStatus = [
-            'labels' => ['Pending', 'Proses', 'Selesai'],
-            'data' => [$stats['pending'], $stats['process'], $stats['done']],
-            'colors' => ['#F59E0B', '#06B6D4', '#10B981'],
+            'labels' => ['Pending', 'Proses', 'Selesai', 'Ditolak'],
+            'data' => [$stats['pending'], $stats['process'], $stats['done'], $stats['rejected']],
+            'colors' => ['#F59E0B', '#06B6D4', '#10B981', '#EF4444'],
         ];
 
         // Chart Data - Category Distribution

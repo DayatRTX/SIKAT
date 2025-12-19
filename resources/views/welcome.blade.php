@@ -29,12 +29,19 @@
 
                 <!-- Navigation Buttons -->
                 <div class="flex items-center space-x-3">
-                    <a href="{{ route('login') }}" class="px-6 py-2.5 text-[#9a9bff] font-semibold hover:bg-[#f5f5ff] rounded-full transition-all duration-300">
-                        Masuk
-                    </a>
-                    <a href="{{ route('register') }}" class="btn-primary px-6 py-2.5 text-white font-semibold rounded-full shadow-lg shadow-[#f5f5ff]0/30 transition-all duration-300 hover:scale-105">
-                        Daftar
-                    </a>
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-[#B1B2FF] via-[#A0A1F5] to-[#9091EB] text-white font-bold rounded-full shadow-lg shadow-[#B1B2FF]/30 hover:shadow-[#B1B2FF]/50 hover:scale-105 transition-all duration-300">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Kembali ke Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="px-6 py-2.5 text-[#9a9bff] font-semibold hover:bg-[#f5f5ff] rounded-full transition-all duration-300">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}" class="btn-primary px-6 py-2.5 text-white font-semibold rounded-full shadow-lg shadow-[#f5f5ff]0/30 transition-all duration-300 hover:scale-105">
+                            Daftar
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -69,14 +76,22 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('register') }}" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-white font-bold rounded-xl shadow-xl shadow-[#f5f5ff]0/30 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                            <i class="fas fa-paper-plane mr-2"></i>
-                            Lapor Sekarang
-                        </a>
-                        <a href="#cara-kerja" class="inline-flex items-center justify-center px-8 py-4 bg-white text-[#9a9bff] font-bold rounded-xl border-2 border-[#ebebff] hover:border-[#9a9bff] hover:bg-[#f5f5ff] transition-all duration-300 shadow-sm">
-                            <i class="fas fa-play-circle mr-2"></i>
-                            Cara Kerja
-                        </a>
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-white font-bold rounded-xl shadow-xl shadow-[#f5f5ff]0/30 hover:shadow-2xl transition-all duration-300 hover:scale-105 group">
+                                <i class="fas fa-tachometer-alt mr-3 group-hover:rotate-12 transition-transform"></i>
+                                Dashboard Saya
+                                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        @else
+                            <a href="{{ route('register') }}" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-white font-bold rounded-xl shadow-xl shadow-[#f5f5ff]0/30 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Lapor Sekarang
+                            </a>
+                            <a href="#cara-kerja" class="inline-flex items-center justify-center px-8 py-4 bg-white text-[#9a9bff] font-bold rounded-xl border-2 border-[#ebebff] hover:border-[#9a9bff] hover:bg-[#f5f5ff] transition-all duration-300 shadow-sm">
+                                <i class="fas fa-play-circle mr-2"></i>
+                                Cara Kerja
+                            </a>
+                        @endauth
                     </div>
 
                     <!-- Stats -->
