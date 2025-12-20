@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
@@ -54,7 +55,20 @@ class ReportController extends Controller
             'status' => 'pending',
         ]);
 
+        // Get the created report
+        $report = Report::where('user_id', auth()->id())->latest()->first();
+
         \App\Models\ActivityLog::log('report_created', 'Membuat laporan: ' . $report->title, $report);
+
+        // Notify all admins about new report
+        $admins = User::where('role', 'admin')->pluck('id');
+        Notification::sendToMany(
+            $admins,
+            'new_report',
+            'Laporan Baru Masuk! 📝',
+            'Laporan baru dari ' . auth()->user()->name . ': ' . $report->title,
+            $report->id
+        );
 
         return redirect()->route('mahasiswa.reports.index')
             ->with('success', 'Laporan berhasil dikirim dan menunggu validasi admin.');
@@ -132,6 +146,16 @@ class ReportController extends Controller
                 'completed_at' => null,
             ]);
             \App\Models\ActivityLog::log('report_rejected', 'Menolak laporan: ' . $report->title, $report);
+
+            // Notify mahasiswa about rejection
+            Notification::send(
+                $report->user_id,
+                'report_rejected',
+                'Laporan Ditolak ❌',
+                'Laporan "' . $report->title . '" ditolak. Alasan: ' . $validated['reject_reason'],
+                $report->id
+            );
+
             $message = 'Laporan berhasil ditolak.';
         } else {
             $report->update([
@@ -164,6 +188,24 @@ class ReportController extends Controller
         ]);
 
         \App\Models\ActivityLog::log('report_assigned', 'Menugaskan teknisi untuk laporan: ' . $report->title, $report);
+
+        // Notify technician about new task
+        Notification::send(
+            $validated['technician_id'],
+            'task_assigned',
+            'Tugas Baru! 🔧',
+            'Anda ditugaskan untuk laporan: ' . $report->title,
+            $report->id
+        );
+
+        // Notify mahasiswa that report is being processed
+        Notification::send(
+            $report->user_id,
+            'report_process',
+            'Laporan Diproses ⚙️',
+            'Laporan "' . $report->title . '" sedang dalam proses perbaikan.',
+            $report->id
+        );
 
         return back()->with('success', 'Teknisi berhasil ditugaskan.');
     }
@@ -225,6 +267,25 @@ class ReportController extends Controller
 
         \App\Models\ActivityLog::log('report_completed', 'Menyelesaikan perbaikan laporan: ' . $report->title, $report);
 
+        // Notify mahasiswa that report is completed
+        Notification::send(
+            $report->user_id,
+            'report_completed',
+            'Perbaikan Selesai! ✅',
+            'Laporan "' . $report->title . '" telah selesai diperbaiki.',
+            $report->id
+        );
+
+        // Notify all admins about completion
+        $admins = User::where('role', 'admin')->pluck('id');
+        Notification::sendToMany(
+            $admins,
+            'report_completed',
+            'Laporan Selesai ✅',
+            'Teknisi telah menyelesaikan laporan: ' . $report->title,
+            $report->id
+        );
+
         return back()->with('success', 'Perbaikan berhasil diselesaikan!');
     }
 
@@ -246,6 +307,15 @@ class ReportController extends Controller
         ]);
 
         \App\Models\ActivityLog::log('report_rejected', 'Menolak laporan: ' . $report->title, $report);
+
+        // Notify mahasiswa about rejection
+        Notification::send(
+            $report->user_id,
+            'report_rejected',
+            'Laporan Ditolak ❌',
+            'Laporan "' . $report->title . '" ditolak. Alasan: ' . $validated['reject_reason'],
+            $report->id
+        );
 
         return back()->with('success', 'Laporan berhasil ditolak.');
     }

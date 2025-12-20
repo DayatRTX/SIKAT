@@ -120,17 +120,151 @@
                             <i class="fas fa-bars text-xl text-gray-700"></i>
                         </button>
 
+                        <!-- Mobile Notification Bell -->
+                        <div x-data="{ notifOpen: false }" class="lg:hidden relative">
+                            <button @click="notifOpen = !notifOpen" class="relative p-2 text-slate-600 hover:text-[#9a9bff] hover:bg-[#f5f5ff] rounded-xl transition-all duration-300">
+                                <i class="fas fa-bell text-xl"></i>
+                                @if(auth()->user()->unreadNotificationsCount() > 0)
+                                    <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse shadow-sm">
+                                        {{ auth()->user()->unreadNotificationsCount() > 9 ? '9+' : auth()->user()->unreadNotificationsCount() }}
+                                    </span>
+                                @endif
+                            </button>
+
+                            <!-- Mobile Notification Dropdown -->
+                            <div 
+                                x-show="notifOpen"
+                                @click.away="notifOpen = false"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95"
+                                class="absolute right-0 top-12 w-72 card-glass rounded-2xl shadow-2xl overflow-hidden border border-white/30 z-50"
+                            >
+                                <div class="p-3 border-b border-slate-200 bg-gradient-to-r from-[#B1B2FF]/10 to-[#D2DAFF]/10">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-bold text-slate-800 text-sm">Notifikasi</h3>
+                                        @if(auth()->user()->unreadNotificationsCount() > 0)
+                                            <form action="{{ route('notifications.markAllRead') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="text-xs text-[#9a9bff] hover:underline font-medium">
+                                                    Tandai dibaca
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="max-h-64 overflow-y-auto">
+                                    @forelse(auth()->user()->notifications()->take(10)->get() as $notif)
+                                        <a href="{{ route('notifications.read', $notif->id) }}" 
+                                           class="block p-3 hover:bg-slate-50 transition-all border-b border-slate-100 {{ !$notif->is_read ? 'bg-blue-50/50' : '' }}">
+                                            <div class="flex items-start gap-2">
+                                                <div class="w-7 h-7 rounded-lg bg-{{ $notif->color }}-100 flex items-center justify-center flex-shrink-0">
+                                                    <i class="fas {{ $notif->icon }} text-{{ $notif->color }}-500 text-xs"></i>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="font-semibold text-xs text-slate-800 truncate">{{ $notif->title }}</p>
+                                                    <p class="text-[11px] text-slate-600 line-clamp-2">{{ $notif->message }}</p>
+                                                    <p class="text-[10px] text-slate-400 mt-1">{{ $notif->created_at->diffForHumans() }}</p>
+                                                </div>
+                                                @if(!$notif->is_read)
+                                                    <div class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0 mt-1"></div>
+                                                @endif
+                                            </div>
+                                        </a>
+                                    @empty
+                                        <div class="p-6 text-center">
+                                            <div class="w-10 h-10 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-2">
+                                                <i class="fas fa-bell-slash text-slate-400 text-sm"></i>
+                                            </div>
+                                            <p class="text-xs text-slate-500">Tidak ada notifikasi</p>
+                                        </div>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Page Title (Desktop) -->
                         <div class="hidden lg:block">
                             <h2 class="text-lg font-bold text-gray-800">@yield('page-title', 'Dashboard')</h2>
                         </div>
 
                         <!-- User Menu (Desktop) - Vibrant -->
-                        <div x-data="{ dropdownOpen: false }" class="hidden lg:flex items-center space-x-4 relative">
-                            <div class="text-right">
-                                <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
-                                <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
+                        <div class="hidden lg:flex items-center space-x-4 relative">
+                            <!-- Notification Bell -->
+                            <div x-data="{ notifOpen: false }" class="relative">
+                                <button @click="notifOpen = !notifOpen" class="relative p-2 text-slate-600 hover:text-[#9a9bff] hover:bg-[#f5f5ff] rounded-xl transition-all duration-300">
+                                    <i class="fas fa-bell text-xl"></i>
+                                    @if(auth()->user()->unreadNotificationsCount() > 0)
+                                        <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse shadow-sm">
+                                            {{ auth()->user()->unreadNotificationsCount() > 9 ? '9+' : auth()->user()->unreadNotificationsCount() }}
+                                        </span>
+                                    @endif
+                                </button>
+
+                                <!-- Notification Dropdown -->
+                                <div 
+                                    x-show="notifOpen"
+                                    @click.away="notifOpen = false"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 scale-95"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute right-0 top-12 w-80 card-glass rounded-2xl shadow-2xl overflow-hidden border border-white/30 z-50"
+                                >
+                                    <div class="p-4 border-b border-slate-200 bg-gradient-to-r from-[#B1B2FF]/10 to-[#D2DAFF]/10">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="font-bold text-slate-800">Notifikasi</h3>
+                                            @if(auth()->user()->unreadNotificationsCount() > 0)
+                                                <form action="{{ route('notifications.markAllRead') }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="text-xs text-[#9a9bff] hover:underline font-medium">
+                                                        Tandai semua dibaca
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="max-h-80 overflow-y-auto">
+                                        @forelse(auth()->user()->notifications()->take(10)->get() as $notif)
+                                            <a href="{{ route('notifications.read', $notif->id) }}" 
+                                               class="block p-4 hover:bg-slate-50 transition-all border-b border-slate-100 {{ !$notif->is_read ? 'bg-blue-50/50' : '' }}">
+                                                <div class="flex items-start gap-3">
+                                                    <div class="w-8 h-8 rounded-lg bg-{{ $notif->color }}-100 flex items-center justify-center flex-shrink-0">
+                                                        <i class="fas {{ $notif->icon }} text-{{ $notif->color }}-500 text-sm"></i>
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="font-semibold text-sm text-slate-800 truncate">{{ $notif->title }}</p>
+                                                        <p class="text-xs text-slate-600 line-clamp-2">{{ $notif->message }}</p>
+                                                        <p class="text-[10px] text-slate-400 mt-1">{{ $notif->created_at->diffForHumans() }}</p>
+                                                    </div>
+                                                    @if(!$notif->is_read)
+                                                        <div class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0 mt-2"></div>
+                                                    @endif
+                                                </div>
+                                            </a>
+                                        @empty
+                                            <div class="p-8 text-center">
+                                                <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-3">
+                                                    <i class="fas fa-bell-slash text-slate-400"></i>
+                                                </div>
+                                                <p class="text-sm text-slate-500">Tidak ada notifikasi</p>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- User Info & Dropdown -->
+                            <div x-data="{ dropdownOpen: false }" class="flex items-center space-x-4 relative">
+                                <div class="text-right">
+                                    <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name }}</p>
+                                    <p class="text-xs text-slate-600 capitalize font-medium">{{ auth()->user()->role }}</p>
+                                </div>
                             <button @click="dropdownOpen = !dropdownOpen" class="relative group">
                                 @if(auth()->user()->photo)
                                     <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="{{ auth()->user()->name }}" class="w-11 h-11 rounded-full object-cover shadow-lg ring-4 ring-white/60 hover:scale-110 transition-all duration-300">
@@ -164,6 +298,7 @@
                                         <span>Logout</span>
                                     </button>
                                 </form>
+                            </div>
                             </div>
                         </div>
                     </div>

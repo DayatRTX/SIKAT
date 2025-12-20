@@ -64,3 +64,11 @@ Route::middleware(['auth', 'role:teknisi'])->prefix('teknisi')->name('teknisi.')
     Route::put('/tugas/{report}/complete', [ReportController::class, 'complete'])->name('tasks.complete');
 });
 
+// Notification Routes
+Route::middleware('auth')->prefix('notifications')->name('notifications.')->group(function () {
+    Route::get('/unread-count', [App\Http\Controllers\NotificationController::class, 'unreadCount'])->name('unreadCount');
+    Route::get('/recent', [App\Http\Controllers\NotificationController::class, 'recent'])->name('recent');
+    Route::get('/{id}/read', [App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('read');
+    Route::post('/mark-all-read', [App\Http\Controllers\NotificationController::class, 'markAllRead'])->name('markAllRead');
+});
+

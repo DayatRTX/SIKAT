@@ -137,9 +137,13 @@
             @endphp
             <div class="glass-card rounded-2xl p-4 shadow-lg border-l-4 {{ $color[4] }}">
                 <div class="flex items-center space-x-3 mb-3">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white font-bold shadow-md text-lg">
-                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                    </div>
+                    @if($user->photo)
+                        <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-xl object-cover shadow-md">
+                    @else
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white font-bold shadow-md text-lg">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
+                    @endif
                     <div class="flex-1 min-w-0">
                         <p class="font-bold text-slate-800 truncate">
                             {{ $user->name }}
@@ -228,9 +232,13 @@
                         <tr class="hover:bg-gradient-to-r hover:from-[#f5f5ff] hover:to-[#f0f4ff] transition-all duration-300 border-l-4 {{ $color[4] }} group">
                             <td class="px-6 py-4">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white font-bold shadow-md">
-                                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                                    </div>
+                                    @if($user->photo)
+                                        <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-xl object-cover shadow-md">
+                                    @else
+                                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br {{ $color[0] }} {{ $color[1] }} flex items-center justify-center text-white font-bold shadow-md">
+                                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                                        </div>
+                                    @endif
                                     <div>
                                         <p class="font-bold text-slate-800 text-sm">{{ $user->name }}</p>
                                         @if($user->id === auth()->id())
